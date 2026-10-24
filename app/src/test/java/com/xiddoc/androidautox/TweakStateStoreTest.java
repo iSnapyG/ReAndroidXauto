@@ -106,6 +106,35 @@ public class TweakStateStoreTest {
         assertFalse(store.isRebootPending(KEY2));
     }
 
+    @Test
+    public void clearRebootPending_clearsOnlyTheMarkersAndKeepsEnabledState() {
+        TweakStateStore store = new TweakStateStore(context);
+        store.setEnabled(KEY, true);
+        store.setRebootPending(KEY, true);
+        store.setRebootPending(KEY2, true);
+
+        store.clearRebootPending(KEY, KEY2);
+
+        assertFalse(store.isRebootPending(KEY));
+        assertFalse(store.isRebootPending(KEY2));
+        assertTrue(store.isEnabled(KEY));
+    }
+
+    @Test
+    public void clearRebootPending_withNothingPendingChangesNothing() {
+        TweakStateStore store = new TweakStateStore(context);
+        store.setRebootPending(KEY2, true);
+        store.clearRebootPending(KEY);
+        assertFalse(store.isRebootPending(KEY));
+        assertTrue(store.isRebootPending(KEY2));
+    }
+
+    @Test
+    public void clearRebootPending_rejectsBadKeys() {
+        TweakStateStore store = new TweakStateStore(context);
+        assertThrows(IllegalArgumentException.class, () -> store.clearRebootPending(KEY, ""));
+    }
+
     // -------------------------------------------------------------------------
     // Key-collision safety: reboot-pending key must NOT overlap the tweak key
     // -------------------------------------------------------------------------

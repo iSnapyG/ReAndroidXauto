@@ -28,10 +28,7 @@ public class BootReceiver extends BroadcastReceiver {
         // yellow can resolve to green (or red only if its flags actually drifted) once
         // MainActivity reconciles against the phenotype DB.
         if (BootScheduleGate.isReboot(intent)) {
-            TweakStateStore store = new TweakStateStore(ctx);
-            for (String key : TweakRegistry.ALL_KEYS) {
-                store.setRebootPending(key, false);
-            }
+            new TweakStateStore(ctx).clearRebootPending(TweakRegistry.ALL_KEYS);
         }
 
         // Re-establish the periodic re-apply job and kick one prompt re-apply for all three

@@ -163,8 +163,9 @@ public class ReapplySchedulerTest {
             ReapplyScheduler.runOnceSoon(ctx);
 
             JobInfo.Builder built = b.constructed().get(0);
-            verify(built).setMinimumLatency(10_000L);
-            verify(built).setOverrideDeadline(120_000L);
+            verify(built).setMinimumLatency(ReapplyScheduler.BOOT_DELAY_MS);
+            verify(built).setOverrideDeadline(ReapplyScheduler.BOOT_DEADLINE_MS);
+            verify(built).setRequiresBatteryNotLow(true);
         }
         verify(js).schedule(any(JobInfo.class));
     }
@@ -241,6 +242,7 @@ public class ReapplySchedulerTest {
             when(b.setRequiredNetworkType(anyInt())).thenReturn(b);
             when(b.setMinimumLatency(anyLong())).thenReturn(b);
             when(b.setOverrideDeadline(anyLong())).thenReturn(b);
+            when(b.setRequiresBatteryNotLow(anyBoolean())).thenReturn(b);
             when(b.build()).thenReturn(mock(JobInfo.class));
         });
     }

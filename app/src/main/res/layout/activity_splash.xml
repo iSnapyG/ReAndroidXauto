@@ -56,7 +56,6 @@
         android:id="@+id/disable_warning_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:enabled="false"
         android:minWidth="200dp"
         android:text="@string/disable_startup_warning"
         style="@style/ButtonStyle"

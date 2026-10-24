@@ -4,36 +4,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-
-import static com.xiddoc.androidautox.MainActivity.runSuWithCmd;
 
 public class SplashActivity extends AppCompatActivity {
 
-
-    Context context;
-    String newVersionName;
 
     // Shared state used by the proceed helper so both the proceed button and the
     // "don't show again" button can reuse the exact same root-gated flow.
@@ -99,9 +80,6 @@ public class SplashActivity extends AppCompatActivity {
         }
     };
 
-    private static final String actualVersion = BuildConfig.VERSION_NAME;
-    private static final String BASE_URL = "https://api.github.com/repos/Xiddoc/AndroidAutoX/releases/latest";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,19 +114,11 @@ public class SplashActivity extends AppCompatActivity {
         editor.putBoolean("aa_new_seekbar", false);
         editor.putBoolean("aa_material_you", false);
         editor.putBoolean("aa_vertical_bar", false);
-        editor.commit();
+        editor.apply();
 
         // Read the persisted skip flag AFTER the tweak-default reset block above
         // (which deliberately does not touch this key).
         skipStartupWarning = sharedPreferences.getBoolean(SKIP_STARTUP_WARNING_KEY, false);
-
-        // The update check is best-effort; never let a transport/network setup problem
-        // (e.g. a missing HTTP stack under unit tests) take down the splash screen.
-        try {
-            requestLatest();
-        } catch (Throwable t) {
-            Log.w("com.xiddoc.androidautox", "Update check unavailable", t);
-        }
 
         final Button continueButton = findViewById(R.id.proceed_button);
         final Button disableWarningButton = findViewById(R.id.disable_warning_button);
@@ -164,21 +134,6 @@ public class SplashActivity extends AppCompatActivity {
             return;
         }
 
-        continueButton.setEnabled(false);
-        Log.v("com.xiddoc.androidautox", "Engaging countdown");
-        new CountDownTimer(5000, 10) {
-            public void onTick(long millisUntilFinished) {
-                int secondsRemaining = UpdateChecker.countdownSeconds(millisUntilFinished);
-                continueButton.setText(getString(R.string.proceed) + " (" + secondsRemaining + ")");
-            }
-
-            @Override
-            public void onFinish() {
-                continueButton.setEnabled(true);
-                continueButton.setText(R.string.proceed);
-            }
-        }.start();
-
         continueButton.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -186,22 +141,6 @@ public class SplashActivity extends AppCompatActivity {
                         proceedIfRooted();
                     }
                 });
-
-        // Bottom "don't show this warning again" button. Starts disabled (set in XML)
-        // and runs its OWN 10s countdown, mirroring the proceed button's idiom.
-        disableWarningButton.setEnabled(false);
-        new CountDownTimer(10000, 10) {
-            public void onTick(long millisUntilFinished) {
-                int secondsRemaining = UpdateChecker.countdownSeconds(millisUntilFinished);
-                disableWarningButton.setText(getString(R.string.disable_startup_warning) + " (" + secondsRemaining + ")");
-            }
-
-            @Override
-            public void onFinish() {
-                disableWarningButton.setEnabled(true);
-                disableWarningButton.setText(R.string.disable_startup_warning);
-            }
-        }.start();
 
         disableWarningButton.setOnClickListener(
                 new View.OnClickListener() {
@@ -233,9 +172,6 @@ public class SplashActivity extends AppCompatActivity {
         userRequestedProceed = true;
         switch (RootGate.decide(isDeviceRooted)) {
             case PROCEED:
-                if (newVersionName != null) {
-                    mainActivityIntent.putExtra("NewVersionName", newVersionName);
-                }
                 startActivity(mainActivityIntent);
                 finish();
                 break;
@@ -340,67 +276,4 @@ public class SplashActivity extends AppCompatActivity {
             proceedIfRooted();
         }
     }
-
-    public String requestLatest() {
-
-        RequestQueue queue = Volley.newRequestQueue(this.getApplicationContext());
-
-        final JsonObjectRequest jsonObjectRequest = new JsonObjectRequest
-                (Request.Method.GET, BASE_URL, null, new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            String fetchedVersion = response.getString("tag_name");
-                            UpdateChecker.Result result =
-                                    UpdateChecker.evaluate(actualVersion, fetchedVersion);
-                            switch (result.outcome) {
-                                case UPDATE_AVAILABLE:
-                                    // A strictly newer release: surface it via the banner.
-                                    newVersionName = result.newVersionName;
-                                    break;
-                                case UP_TO_DATE:
-                                    // Already current: no banner, no toast.
-                                    newVersionName = null;
-                                    break;
-                                case INVALID_CURRENT_VERSION:
-                                    // Unparseable installed version (e.g. a debug build).
-                                    Toast.makeText(SplashActivity.this, "Debug build: could not check latest version", Toast.LENGTH_LONG).show();
-                                    newVersionName = null;
-                                    break;
-                                case INVALID_FETCHED_VERSION:
-                                default:
-                                    // Missing/malformed release tag: preserve the original
-                                    // behaviour where the bad tag propagated uncaught (the
-                                    // inline new Version(tag.substring(1)) blew up before any
-                                    // toast path ran). An IllegalArgumentException is not a
-                                    // JSONException, so it escapes onResponse exactly as before.
-                                    newVersionName = null;
-                                    throw new IllegalArgumentException("Invalid fetched version");
-                            }
-
-
-                        } catch  (JSONException e) {
-                            newVersionName = null;
-                            Toast.makeText(SplashActivity.this, "Attention: could not check latest version. Ensure you have internet connectin.", Toast.LENGTH_LONG).show();
-                            e.printStackTrace();
-                        }
-
-                    }
-                }, new Response.ErrorListener() {
-
-
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        newVersionName = null;
-                    }
-                });
-
-
-        queue.add(jsonObjectRequest);
-        return this.newVersionName;
-    }
-
-
-
-
 }

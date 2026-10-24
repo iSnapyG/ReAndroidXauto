@@ -48,15 +48,24 @@ public final class ReapplyScheduler {
     /** Re-check interval after a re-apply was deferred (AA projecting). Modest, not a loop. */
     static final long RETRY_LATENCY_MS = 15L * 60 * 1000; // 15 minutes
 
-    /** One-shot re-apply shortly from now (e.g. right after boot). */
+    /**
+     * How long the first re-apply after a boot waits. Right after boot the phone is busy
+     * starting apps, and the re-apply opens a root shell and reads Google Play services'
+     * database, so it is kept well out of the way.
+     */
+    static final long BOOT_DELAY_MS = 3L * 60 * 1000; // 3 minutes
+    static final long BOOT_DEADLINE_MS = 15L * 60 * 1000; // 15 minutes
+
+    /** One-shot re-apply a few minutes from now (used after boot or an app update). */
     public static void runOnceSoon(Context ctx) {
         JobScheduler js = (JobScheduler) ctx.getSystemService(Context.JOB_SCHEDULER_SERVICE);
         if (js == null) return;
         if (!(isAutoReapplyEnabled(ctx) && TweakRegistry.anyEnabled(ctx))) return;
         JobInfo job = new JobInfo.Builder(
                 ReapplyJobService.JOB_ID_ONESHOT, new ComponentName(ctx, ReapplyJobService.class))
-                .setMinimumLatency(10_000)
-                .setOverrideDeadline(120_000)
+                .setMinimumLatency(BOOT_DELAY_MS)
+                .setOverrideDeadline(BOOT_DEADLINE_MS)
+                .setRequiresBatteryNotLow(true)
                 .build();
         js.schedule(job);
     }

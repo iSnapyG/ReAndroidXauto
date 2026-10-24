@@ -119,6 +119,25 @@ public final class TweakStateStore {
         prefs.edit().putBoolean(rebootPendingKey(key), value).apply();
     }
 
+    /**
+     * Clears the "reboot pending" marker of every key in one write, and writes nothing at all
+     * when none is set. Used at boot, where one preferences write beats one per tweak.
+     *
+     * @throws IllegalArgumentException if any key is null or empty
+     */
+    public void clearRebootPending(String... keys) {
+        SharedPreferences.Editor editor = prefs.edit();
+        boolean any = false;
+        for (String key : keys) {
+            checkKey(key);
+            if (prefs.getBoolean(rebootPendingKey(key), false)) {
+                editor.remove(rebootPendingKey(key));
+                any = true;
+            }
+        }
+        if (any) editor.apply();
+    }
+
     // -------------------------------------------------------------------------
     // Internal helpers
     // -------------------------------------------------------------------------

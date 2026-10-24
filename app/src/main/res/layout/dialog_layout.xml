@@ -56,15 +56,6 @@
                 android:adjustViewBounds="true"
                 android:scaleType="fitStart"/>
 
-        <EditText
-            android:id="@+id/textuxprototype"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/uxprototype_dialog"
-            android:textSize="16sp"
-            android:visibility="gone"
-            android:autofillHints=""
-            android:inputType="text" />
 
         <LinearLayout
             android:layout_width="match_parent"

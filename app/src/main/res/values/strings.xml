@@ -133,11 +133,7 @@ WARNING: This tweak has not been extensively tested and could potentially break 
     <string name="remove_paired_car">Remove a paired car</string>
     <string name="choose_cars">Choose car(s)</string>
     <string name="tutorial_carremover">Did you know that you can only remove all the paired cars from Android Auto and you cannot remove just one at a time? This option will rescue you if you want to delete a car from Android Auto, just select which car(s) you want and it/they will be removed.</string>
-    <string name="coolwalk_daynight_tweak">Light/Dark Coolwalk</string>
-    <string name="coolwalk_daynight_tutorial">This tweak will activate day/night mode for Coolwalk mode. Looks kind of broken right now and can\'t handle switch very well.</string>
     <string name="custom_hotseat_option">Custom seating option</string>
-    <string name="tutorial_coolwalk">This tweak will activate a new design in Android Auto (codename Coolwalk) that can be toggled in Android Auto\'s settings and that tweaks a bit the appearance on smaller screens. This design features an always-on side panel and some different graphics. This feature is in early stage at the moment. Android Auto 6.9 or superior is required.</string>
-    <string name="coolwalk_tweak">Coolwalk design</string>
     <string name="tutorial_focus_settings">This tweak will activate a new option in Android Auto settings to manually customize whether Android Auto must be launched as soon as you connect your phone with the car. Android Auto 6.8 or superior is required.</string>
     <string name="focus_tweak">Focus settings</string>
     <string name="assistant_tips">Assistant tips</string>
@@ -152,13 +148,9 @@ WARNING: This tweak has not been extensively tested and could potentially break 
     <string name="restricted_coolwalk">\nThis option will only work with Coolwalk enabled.</string>
     <string name="tappable_progress">New progress bar</string>
     <string name="tappable_progress_tutorial">Finally we are gaining a touchable progress bar for what\'s playing on Android Auto. Yes, we can seek through the current track. Requires Android Auto 8.3 or superior.</string>
-    <string name="uxprototype_tutorial">All this tweak does is basically create a free shortcut on the home page to open a web page. It involves an Easter egg hidden in Android Auto released on 1st of April 2022. Activate \"Developer mode\" in \"Developer settings\" under \"Application mode\". It\'s the only way to have an actual fullscreen app on Android Auto right now. WARNING: Not exitable, use this if you only plan on using this on your car. There\'s no back button either.</string>
-    <string name="uxprototype_dialog">Enter a valid full URL</string>
-    <string name="uxprototype_tweak">Custom shortcut</string>
     <string name="tutorial_new_seekbar">"This tweak enables a movable seekbar for media apps."</string>
     <string name="tutorial_materialyou">"This tweak enables Material You style for the Android Auto's settings on the phone. This properly works only on Android Auto 8.8 or superior, as tested."</string>
     <string name="materialyou_tweak" translatable="false">"Material You UI"</string>
-    <string name="tutorial_nocoolwalk">Are you absolutely hating Coolwalk? This tweak is for you.</string>
     <string name="portrait_layout">Force vertical layout</string>
     <string name="tutorial_portrait">This tweak will force the portrait layout of Android Auto with dashboard on the bottom.</string>
     <string name="inertial_scroll_tweak">inertial scroll</string>
@@ -200,6 +192,53 @@ WARNING: This tweak has not been extensively tested and could potentially break 
     <!-- Settings tab: developer-mode toggle toasts -->
     <string name="settings_devmode_on">Developer mode enabled</string>
     <string name="settings_devmode_off">Developer mode disabled</string>
+
+    <!-- Settings: compatibility check, presets, export / import -->
+    <string name="settings_compat_label">Compatibility check</string>
+    <string name="settings_presets_label">Tweak presets</string>
+    <string name="settings_export_label">Export tweaks to file</string>
+    <string name="settings_import_label">Import tweaks from file</string>
+    <string name="settings_compat_desc">Scans the installed Android Auto app and lists tweaks whose flags it no longer mentions, so you can tell which ones probably do nothing on your version. This is a heuristic: a flag that is present may still be ignored.</string>
+    <string name="settings_presets_desc">Save the tweaks you currently have turned on under a name, and switch back to them later in one step.</string>
+    <string name="settings_export_desc">Saves the tweaks you currently have turned on (and their slider values) to a text file in Downloads.</string>
+    <string name="settings_import_desc">Loads a tweak file saved by Export and turns those tweaks on, turning the others off.</string>
+
+    <string name="compat_title">Compatibility check</string>
+    <string name="compat_checking">Scanning Android Auto\u2026</string>
+    <string name="compat_not_installed">Android Auto is not installed on this phone, so there is nothing to check.</string>
+    <string name="compat_failed">Could not read the Android Auto app: %1$s</string>
+    <string name="compat_all_good">All %1$d checkable tweaks have their flags in this Android Auto version.</string>
+    <string name="compat_summary">%1$d of %2$d checkable tweaks have all their flags in this Android Auto version. These do not:</string>
+    <string name="compat_line_missing">%1$s: none of %2$d flags found</string>
+    <string name="compat_line_partial">%1$s: %2$d of %3$d flags found</string>
+    <string name="compat_unchecked">%1$d tweak(s) only use Google Play services flags and cannot be checked this way.</string>
+    <string name="compat_disclaimer">Heuristic only: it looks for each flag name inside the Android Auto app. Absence means the tweak probably does nothing; presence does not prove it works.</string>
+
+    <string name="presets_title">Tweak presets</string>
+    <string name="presets_save_current">Save current tweaks as a preset\u2026</string>
+    <string name="presets_name_hint">Preset name</string>
+    <string name="presets_save">Save</string>
+    <string name="presets_saved">Saved preset \"%1$s\"</string>
+    <string name="presets_replaced">Replaced preset \"%1$s\"</string>
+    <string name="presets_invalid_name">Enter a name of up to %1$d characters.</string>
+    <string name="presets_too_many">You can keep up to %1$d presets. Delete one first.</string>
+    <string name="presets_nothing_to_save">Turn on at least one tweak first.</string>
+    <string name="presets_apply">Apply</string>
+    <string name="presets_delete">Delete</string>
+    <string name="presets_deleted">Deleted \"%1$s\"</string>
+    <string name="presets_missing">That preset could not be read.</string>
+
+    <string name="config_nothing_to_export">No tweaks are turned on, so there is nothing to export.</string>
+    <string name="config_exported">Saved to Downloads/%1$s</string>
+    <string name="config_export_failed">Could not write the file to Downloads.</string>
+    <string name="config_import_failed">Could not import: %1$s</string>
+    <string name="config_apply_title">Apply this configuration?</string>
+    <string name="config_apply_enable">Turn on: %1$s</string>
+    <string name="config_apply_disable">Turn off: %1$s</string>
+    <string name="config_apply_skipped">%1$d unknown entries in the file were ignored.</string>
+    <string name="config_apply_note">Google Play services will restart, and Android Auto needs a reboot to pick the changes up.</string>
+    <string name="config_already_matches">Your tweaks already match this configuration.</string>
+    <string name="config_apply_button">Apply</string>
 
     <!-- AutoX virtual-display foreground service notification -->
     <string name="autox_notification_channel_name">AutoX Projection</string>

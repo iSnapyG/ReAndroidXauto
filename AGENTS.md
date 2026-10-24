@@ -49,6 +49,10 @@ AndroidAutoX is a native Android app that applies "tweaks" to Google's Android A
 | `app/src/main/java/com/xiddoc/androidautox/RootDb.java` | App-side handle that binds `PhixitRootService` and exposes `IPhixitRoot` |
 | `app/src/main/aidl/com/xiddoc/androidautox/IPhixitRoot.aidl` | Root SQLite bridge interface (read/write partitions, query, exec) |
 | `app/src/main/aidl/com/xiddoc/androidautox/Partition.aidl` + `Partition.java` | Parcelable {id, blob} crossing the binder |
+| `app/src/main/java/com/xiddoc/androidautox/TweakConfig.java` | Immutable snapshot of enabled tweaks + slider values; text format shared by presets and export/import |
+| `app/src/main/java/com/xiddoc/androidautox/TweakPresets.java` | Named `TweakConfig`s in the `tweak_presets` prefs file |
+| `app/src/main/java/com/xiddoc/androidautox/FlagPresence.java` | Scans Android Auto's dex string tables for flag names (compatibility check) |
+| `app/src/main/java/com/xiddoc/androidautox/TweakCompatibility.java` | Turns flag presence into a per-tweak verdict (advisory, heuristic) |
 | `app/src/main/res/values/strings.xml` | English source strings (localization source of truth) |
 | `app/src/main/res/values-*/strings.xml` | ~33 translated locales (edited via PRs) |
 | `app/src/main/java/com/xiddoc/androidautox/autox/` | AutoX virtual-display subsystem (pure-logic + framework glue) |

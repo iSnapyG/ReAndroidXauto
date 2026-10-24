@@ -115,11 +115,7 @@ Android Auto 5.8以降が必要です。</string>
     <string name="remove_paired_car">ペアリングされた車を削除</string>
     <string name="choose_cars">車を選択</string>
     <string name="tutorial_carremover">ペアリングされた全ての車を一括でAndroid Autoから削除することしかできず、一度に1台だけ削除することはできないことをご存知ですか？このオプションは、車をAndroid Autoから削除したい場合に役立ちます。必要な車を選択するだけで、その車が削除されます。</string>
-    <string name="coolwalk_daynight_tweak">ライト/ダーク Coolwalk</string>
-    <string name="coolwalk_daynight_tutorial">この調整は、Coolwalkモードの昼/夜モードを有効にします。現在壊れているようで、スイッチをうまく扱えません。</string>
     <string name="custom_hotseat_option">カスタム座席設定</string>
-    <string name="tutorial_coolwalk">この調整は、Android Autoの新しいデザイン (コードネーム Coolwalk) を有効にします。これはAndroid Auto内の設定で切り替えることができ、小さな画面での表示を微調整します。このデザインでは、常にサイドパネルといくつかの異なるグラフィックを備えています。現在、この機能は初期段階にあります。Android Auto 6.9以降が必要です。</string>
-    <string name="coolwalk_tweak">Coolwalkのデザイン</string>
     <string name="tutorial_focus_settings">この微調整は、車と携帯電話を接続してすぐにAndroid Autoを起動する設定を有効化します。Android Auto 6.8以上が必要です。</string>
     <string name="focus_tweak">フォーカス設定</string>
     <string name="assistant_tips">アシスタントのヒント</string>
@@ -135,12 +131,8 @@ Android Auto 5.8以降が必要です。</string>
     <string name="warning_patch_apps">警告! この操作は選択したアプリのすべてのデータを消去します。 データのバックアップがあることを確認してください。とにかく続行しますか?</string>
     <string name="tappable_progress">新しいプログレスバー</string>
     <string name="tappable_progress_tutorial">ついに、Android Autoで再生中のコンテンツを調整するためのタッチ可能なスライド式プログレスバーが登場しました。はい、現在再生中のトラックをスクロールすることができます。Android Auto 8.3以降が必要です。</string>
-    <string name="uxprototype_tutorial">この調整は基本的にウェブページを開くための自由なショートカットを作成します。 これは、2022年4月1日にAndroid Autoでリリースされたイースターエッグを含みます。「デベロッパー向けの設定」の中の「アプリモード」で「デベロッパー」を有効にします。 現在、Android Autoで実際のフルスクリーンアプリを利用する唯一の方法です。 警告: 終了できないので、これを車でのみ使用する場合に使用してください。バックボタンもありません。</string>
-    <string name="uxprototype_dialog">有効なフルURLを入力してください</string>
-    <string name="uxprototype_tweak">カスタムショートカット</string>
     <string name="tutorial_new_seekbar">"この調整により、メディアアプリの可動シークバーが可能になります。"</string>
     <string name="tutorial_materialyou">"この調整により、端末のAndroid Autoの設定にMaterial Youスタイルを適用できます。これはテスト済みのAndroid Auto 8.8&gt; でのみ適切に動作します。"</string>
-    <string name="tutorial_nocoolwalk">Coolwalkが完全に嫌いですか? この調整はあなたのためにあります。</string>
     <string name="portrait_layout">Force vertical layout</string>
     <string name="tutorial_portrait">This tweak will force the portrait layout of Android Auto with dashboard on the bottom.</string>
     <string name="inertial_scroll_tweak">Inertial scroll</string>

@@ -115,11 +115,7 @@ Android Auto اصدار 5.8 او أعلى.</string>
     <string name="remove_paired_car">إزالة سيارة مقترنة</string>
     <string name="choose_cars">اختر السيارة (السيارة)</string>
     <string name="tutorial_carremover">هل تعلم أنه يمكنك فقط إزالة جميع السيارات المقترنة من أندرويد أوتو ولا يمكنك إزالة واحدة فقط في كل مرة؟ سيؤدي هذا الخيار إلى إنقاذك إذا كنت ترغب في حذف سيارة من أندرويد أوتو, فقط حدد السيارة (السيارات) التي تريدها/سيتم إزالتها.</string>
-    <string name="coolwalk_daynight_tweak">الوضع الليلي/النهاري لـCoolwalk</string>
-    <string name="coolwalk_daynight_tutorial">سيتم تفعيل الوضع الليلي/النهاري لـCoolwalk. يبدو أنه متعطل الآن لا يمكن التعامل مع التبديل بشكل جيد.</string>
     <string name="custom_hotseat_option">خيار تشغيل مخصص</string>
-    <string name="tutorial_coolwalk">سيؤدي هذا التشفير إلى تنشيط تصميم جديد في Android Auto (Codename Coolwalk) الذي يمكن تبديله في إعدادات Android Auto والذي يغير المظهر قليلا على الشاشات الأصغر. هذا التصميم يحتوي دائما على لوحة جانبية و بعض الرسومات المختلفة. هذه الميزة في مرحلة مبكرة في الوقت الحالي. أصدار Android Auto 6.9 أو أعلى مطلوب.</string>
-    <string name="coolwalk_tweak">Coolwalk design</string>
     <string name="tutorial_focus_settings">سيؤدي هذا التعديل إلى تنشيط خيارات جديدة في إعدادات Android Auto لتخصيص ما إذا كان يجب تشغيل Android Auto بمجرد توصيل هاتفك بالسيارة. أصدار Android Auto 6.8 أو أعلى مطلوب.</string>
     <string name="focus_tweak">إعدادات التركيز</string>
     <string name="assistant_tips">نصائح المساعد</string>
@@ -135,12 +131,8 @@ Android Auto اصدار 5.8 او أعلى.</string>
     <string name="warning_patch_apps">تحذير! هذه العملية سوف ترسل جميع البيانات من التطبيق (التطبيقات) المحدد. الرجاء التأكد من أن لديك نسخة احتياطية من البيانات. هل تريد المتابعة على أي حال؟</string>
     <string name="tappable_progress">شريط التقدم الجديد</string>
     <string name="tappable_progress_tutorial">أخيراً نحن نحصل على شريط تقديم يدعم اللمس لما يتم تشغيله على Android Auto. نعم، يمكننا البحث من خلال المسار الحالي يتطلب أصدار Android Auto 8.3 أو أعلى.</string>
-    <string name="uxprototype_tutorial">كل مايفعله هذا التشفير هو أساسا انشاء اختصار في الصفحة الرئيسية لفتح صفحة انترنت. يتضمن بيضة ايستر مخفية في تطبيق Android Auto الذي تم اصداره في الأول من أبريل 2022. قم بتفعيل \"وضع المطور\" في \"إعدادات المطور\" تحت \"وضع التطبيق. هذه هي الطريقة الوحيدة للحصول على تطبيق كامل الشاشة في Android Auto حاليا. تحذير: لا يمكن الخروج, قم بتفعيله فقط إن كنت تخطط لاستخدامه في سيارتك. كذلك لا يوجد زر للعودة.</string>
-    <string name="uxprototype_dialog">أدخل عنوان URL صحيح</string>
-    <string name="uxprototype_tweak">تخصيص الاختصارات</string>
     <string name="tutorial_new_seekbar">"يتيح هذا التعديل شريط تقديم لتطبيقات الوسائط."</string>
     <string name="tutorial_materialyou">"يتيح هذا التعديل نمط \"مظهرك\" لإعدادات Android Auto على الهاتف. يعمل هذا بشكل صحيح فقط على Android Auto 8.8&gt; كما تم اختباره"</string>
-    <string name="tutorial_nocoolwalk">هل انت تكره Coolwalk حقاً؟ هذا التعديل من أجلك.</string>
     <string name="portrait_layout">Force vertical layout</string>
     <string name="tutorial_portrait">سيؤدي هذا التعديل إلى فرض تخطيط عمودي لـAndroid Auto مع لوحة التحكم في الأسفل.</string>
     <string name="inertial_scroll_tweak">Inertial scroll</string>

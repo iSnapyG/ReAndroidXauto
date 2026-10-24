@@ -115,11 +115,7 @@
     <string name="remove_paired_car">페어링이 제거되었습니다.</string>
     <string name="choose_cars">자동차를 선택하세요</string>
     <string name="tutorial_carremover">안드로이드 오토에서 페어링에 등록 된 모든 차량을 제거 가능하며, 하나만 제거할 수 없다는 것을 알고 있었나요? 안드로이드 오토에서 차량을 삭제하려는 경우 이 옵션을 선택하면 하나만 제거 할 수 있습니다.</string>
-    <string name="coolwalk_daynight_tweak">Coolwalk 주간/야간</string>
-    <string name="coolwalk_daynight_tutorial">Coolwalk 모드의 주간/야간 모드를 활성화합니다. 경고: 지금은 불안정합니다.</string>
     <string name="custom_hotseat_option">사용자 정의 옵션</string>
-    <string name="tutorial_coolwalk">안드로이드 오토의 설정을 전환할 수 있고, 안드로이드 오토 (코드명 Coolwalk) 의 새로운 디자인을 활성화합니다. 이 기능은 현재 초기 단계에 있습니다. 안드로이드 오토 6.9 이상이 필요합니다.</string>
-    <string name="coolwalk_tweak">쿨워크 디자인</string>
     <string name="tutorial_focus_settings">안드로이드 오토가 새로운 옵션이 활성화 되었을 때, 스마트폰이 자동차에 연결하는 즉시 안드로이드 오토가 시작해야 하는지 여부를 수동으로 사용자 지정할 수 있습니다. 
 Android Auto 6.8 이상이 필요합니다.</string>
     <string name="focus_tweak">Focus 설정</string>
@@ -136,18 +132,8 @@ Android Auto 6.8 이상이 필요합니다.</string>
     <string name="warning_patch_apps">경고합니다! 이 작업을 수행하면 선택한 앱에서 모든 데이터가 지워집니다. 데이터 백업이 있는지 확인하십시오. 그래도 계속 진행하시겠습니까?</string>
     <string name="tappable_progress">새로운 진행표시줄</string>
     <string name="tappable_progress_tutorial">마지막으로 Android Auto에서 재생 중인 항목에 대해 터치 가능한 진행률 표시줄을 얻습니다. 지금 현재 트랙을 탐색할 수 있습니다. 단, Android Auto 8.3 이상이 필요합니다.</string>
-    <string name="uxprototype_tutorial">기본적으로 웹 페이지를 열기 위해서는 바탕화면에 바로가기를 만드는 것입니다. 
-2022년 4월 1일에 출시된 안드로이드 오토에 숨겨진 이스터 에그와 관련이 있습니다. 
-\"애플리케이션 모드\" 아래의 \"개발자 설정\"에서 \"개발자 모드\"를 활성화합니다. 
-현재 안드로이드 오토에서 실제 전체 화면 앱을 사용할 수 있는 유일한 방법입니다. 
-경고: 종료할 수 없습니다. 
-차량에서만 사용할 계획인 경우 사용하세요. 
-뒤로가기 버튼도 없습니다.</string>
-    <string name="uxprototype_dialog">유효한 URL을 입력하세요</string>
-    <string name="uxprototype_tweak">사용자 지정의 단축키</string>
     <string name="tutorial_new_seekbar">"미디어 앱을 위한 이동 검색 막대를 활성화합니다."</string>
     <string name="tutorial_materialyou">"스마트폰에서 안드로이드 오토 설정에 대해 스타일을 지정할 수 있습니다. 테스트한 대로 안드로이드 오토 8.8&gt; 에서만 제대로 작동합니다."</string>
-    <string name="tutorial_nocoolwalk">Are you absolutely hating Coolwalk? This tweak is for you.</string>
     <string name="portrait_layout">Force vertical layout</string>
     <string name="tutorial_portrait">This tweak will force the portrait layout of Android Auto with dashboard on the bottom.</string>
     <string name="inertial_scroll_tweak">Inertial scroll</string>

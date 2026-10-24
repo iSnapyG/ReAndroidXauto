@@ -71,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
     private static Context mContext;
     private ImageView noSpeedRestrictionsStatus;
     private ImageView taplimitstatus;
-    private ImageView navstatus;
     private ImageView messageAutoReadStatus;
     private ImageView batteryOutlineStatus;
     private ImageView forceWideScreenStatus;
@@ -88,11 +87,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageView usbBitrateStatus;
     private ImageView wifiBitrateStatus;
     private ImageView newSeekbarTweakStatus;
-    private ImageView coolwalkTweakStatus;
-    private ImageView nocoolwalkTweakStatus;
     private ImageView assistantTipsTweakStatus;
     private ImageView declineSmsTweakStatus;
-    private ImageView uxprototypeTweakStatus;
     private ImageView materialYouTweakStatus;
     private ImageView autoXToggleStatus;
     private Button autoXToggleButton;
@@ -263,7 +259,6 @@ public class MainActivity extends AppCompatActivity {
     };
     private Button nospeed;
     private Button taplimitat;
-    private Button coolwalkDayNightTweak;
     private Button messageAutoReadTweak;
     private Button batteryoutline;
     private Button forceNoWideScreen;
@@ -280,12 +275,9 @@ public class MainActivity extends AppCompatActivity {
     private Button tweakUSBBitrateButton;
     private Button tweakWiFiBitrateButton;
     private Button newSeekbarTweakButton;
-    private Button coolwalkTweak;
-    private Button nocoolwalkTweak;
     private Button deleteCarMode;
     private Button assistantTipsButton;
     private Button declineSmsTweak;
-    private Button uxprototypeButton;
     private Button materialYouButton;
     // Owns the reboot FAB's views + visibility state and is the single place that
     // applies the RebootFabVisibility policy (VISIBLE/GONE + entrance animation +
@@ -604,35 +596,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        coolwalkDayNightTweak = findViewById(R.id.coolwalkdaynighttweak);
-        navstatus = findViewById(R.id.coolwalkdaynightstatus);
-        if (load("coolwalk_daynight_tweak")) {
-            coolwalkDayNightTweak.setText(getString(R.string.disable_tweak_string) + getString(R.string.coolwalk_daynight_tweak));
-            changeStatus(navstatus, 2, false);
-        } else {
-            coolwalkDayNightTweak.setText(getString(R.string.enable_tweak_string) + getString(R.string.coolwalk_daynight_tweak));
-            changeStatus(navstatus, 0, false);
-        }
-        registerReconcileTarget("coolwalk_daynight_tweak", navstatus, coolwalkDayNightTweak,
-                getString(R.string.disable_tweak_string) + getString(R.string.coolwalk_daynight_tweak),
-                getString(R.string.enable_tweak_string) + getString(R.string.coolwalk_daynight_tweak));
-        coolwalkDayNightTweak.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (load("coolwalk_daynight_tweak")) {
-                            revert("coolwalk_daynight_tweak");
-                            coolwalkDayNightTweak.setText(getString(R.string.re_enable_tweak_string) + getString(R.string.coolwalk_daynight_tweak));
-                            changeStatus(navstatus, 0, true);
-                            showRebootButton();
-                        } else {
-                            coolwalkdaynightpatch();
-                        }
-                    }
-                });
-
-        setOnLongClickListener(coolwalkDayNightTweak, R.string.coolwalk_daynight_tutorial, R.drawable.tutorial_coolwalkdaynight);
-
         // "Patch apps" no longer has its own button: the Select-apps screen (AppsList) owns the
         // whole flow via its Apply FAB and signals us, through the launch intent, to run the
         // diff-based apply. Handle a request that arrived with the current intent (covers a
@@ -672,100 +635,6 @@ public class MainActivity extends AppCompatActivity {
         setOnLongClickListener(messageAutoReadTweak, R.string.tutorial_autoplay_message);
 
 
-        uxprototypeButton = findViewById(R.id.uxprototypetweak);
-        uxprototypeTweakStatus = findViewById(R.id.uxptototypestatus);
-        if (load("uxprototype_tweak")) {
-            uxprototypeButton.setText(getString(R.string.disable_tweak_string) + getString(R.string.uxprototype_tweak));
-            changeStatus(uxprototypeTweakStatus, 2, false);
-
-        } else {
-            uxprototypeButton.setText(getString(R.string.enable_tweak_string) + getString(R.string.uxprototype_tweak));
-            changeStatus(uxprototypeTweakStatus, 0, false);
-        }
-        registerReconcileTarget("uxprototype_tweak", uxprototypeTweakStatus, uxprototypeButton,
-                getString(R.string.disable_tweak_string) + getString(R.string.uxprototype_tweak),
-                getString(R.string.enable_tweak_string) + getString(R.string.uxprototype_tweak));
-
-        uxprototypeButton.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-
-                        if (load("uxprototype_tweak")) {
-                            revert("uxprototype_tweak");
-                            uxprototypeButton.setText(getString(R.string.enable_tweak_string) + getString(R.string.uxprototype_tweak));
-                            changeStatus(uxprototypeTweakStatus, 0, true);
-                            showRebootButton();
-                        } else {
-                            final Dialog uxprototypeDialog;
-                            uxprototypeDialog = new Dialog(MainActivity.this);
-                            uxprototypeDialog.setContentView(R.layout.dialog_layout);
-                            uxprototypeDialog.setCancelable(false);
-
-
-                            WindowManager.LayoutParams lp = setDialogLayoutParams(uxprototypeDialog);
-
-                            final EditText readURL = uxprototypeDialog.findViewById(R.id.textuxprototype);
-                            readURL.setVisibility(View.VISIBLE);
-
-                            TextView acceptButton =  uxprototypeDialog.findViewById(R.id.yes);
-                            TextView cancelButton =  uxprototypeDialog.findViewById(R.id.no);
-
-                            acceptButton.setVisibility(View.VISIBLE);
-                            cancelButton.setVisibility(View.VISIBLE);
-                            acceptButton.setOnClickListener(new View.OnClickListener() {
-
-                                public void onClick(View v) {
-
-                                        String url = readURL.getText().toString();
-                                        if (!url.contains("http://") && !url.contains("https://")) {
-                                           url =  "http://" + url;
-                                        }
-
-                                    // Guard against blank / hostless URLs. An empty field normalizes
-                                    // to "http://", which new URL() accepts without throwing, so a junk
-                                    // value would otherwise be persisted+applied silently (the error
-                                    // toast never showed because the dialog was already dismissed).
-                                    // Validate first; on failure show the error toast and keep the
-                                    // dialog open (no dismiss, no apply).
-                                    URL parsed;
-                                    try {
-                                        parsed = new URL(url);
-                                    } catch (MalformedURLException e) {
-                                        parsed = null;
-                                    }
-                                    if (!URLUtil.isValidUrl(url) || parsed == null
-                                            || parsed.getHost() == null || parsed.getHost().isEmpty()) {
-                                        Toast.makeText(uxprototypeDialog.getContext(), R.string.uxprototype_dialog, Toast.LENGTH_LONG).show();
-                                        return;
-                                    }
-
-                                    uxprototypeTweak(parsed);
-                                    uxprototypeDialog.dismiss();
-                                }
-                            });
-                            cancelButton.setOnClickListener(new View.OnClickListener() {
-
-                                public void onClick(View v) {
-                                    uxprototypeDialog.dismiss();
-                                }
-                            });
-                            uxprototypeDialog.show();
-                            // Make the window backdrop transparent so the rounded card corners aren't framed by a gray rectangle.
-                            uxprototypeDialog.getWindow().setBackgroundDrawable(new android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT));
-                            uxprototypeDialog.getWindow().setAttributes(lp);
-
-                        }
-                    }
-
-
-                });
-
-
-        setOnLongClickListener(uxprototypeButton, R.string.uxprototype_tutorial);
-
-
         materialYouButton = findViewById(R.id.materialyoutweak);
         materialYouTweakStatus = findViewById(R.id.materialyoutweakstatus);
         if (load("aa_material_you")) {
@@ -785,8 +654,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
 
-                        if (load("uxprototype_tweak")) {
-                            revert("uxprototype_tweak");
+                        if (load("aa_material_you")) {
+                            revert("aa_material_you");
                             materialYouButton.setText(getString(R.string.enable_tweak_string) + getString(R.string.materialyou_tweak));
                             changeStatus(materialYouTweakStatus, 0, true);
                             showRebootButton();
@@ -1570,85 +1439,6 @@ public class MainActivity extends AppCompatActivity {
 
         setOnLongClickListener(newSeekbarTweakButton, R.string.tutorial_new_seekbar);
 
-        coolwalkTweak = findViewById(R.id.coolwalk_tweak_button);
-        coolwalkTweakStatus = findViewById(R.id.coolwalk_tweak_status);
-        nocoolwalkTweak = findViewById(R.id.nocoolwalk_tweak_button);
-        nocoolwalkTweakStatus = findViewById(R.id.nocoolwalk_tweak_status);
-
-        if (load("aa_activate_coolwalk")) {
-            coolwalkTweak.setText(getString(R.string.disable_tweak_string) + getString(R.string.coolwalk_tweak));
-            changeStatus(coolwalkTweakStatus, 2, false);
-        } else {
-            coolwalkTweak.setText(getString(R.string.enable_tweak_string) + getString(R.string.coolwalk_tweak));
-            changeStatus(coolwalkTweakStatus, 0, false);
-        }
-        registerReconcileTarget("aa_activate_coolwalk", coolwalkTweakStatus, coolwalkTweak,
-                getString(R.string.disable_tweak_string) + getString(R.string.coolwalk_tweak),
-                getString(R.string.enable_tweak_string) + getString(R.string.coolwalk_tweak));
-
-        coolwalkTweak.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                            if (load ("aa_activate_coolwalk")) {
-
-                                coolwalkTweak.setText(getString(R.string.enable_tweak_string) + getString(R.string.coolwalk_tweak));
-                                changeStatus(coolwalkTweakStatus, 0, true);
-                                revert("aa_activate_coolwalk");
-                            } else {
-                                if (load ("aa_deactivate_coolwalk")) {
-                                    revert("aa_deactivate_coolwalk");
-                                    nocoolwalkTweak.setText(getString(R.string.force_disable_tweak) + getString(R.string.coolwalk_tweak));
-                                    changeStatus(nocoolwalkTweakStatus,0,false);
-                                }
-                                activateCoolwalk();
-                            }
-
-                    }
-                });
-
-        setOnLongClickListener(coolwalkTweak, R.string.tutorial_coolwalk, R.drawable.cw5, R.drawable.tutorial_coolwalk_1, R.drawable.tutorial_coolwalk_3);
-
-
-
-
-        if (load("aa_deactivate_coolwalk")) {
-            nocoolwalkTweak.setText(getString(R.string.re_enable_tweak_string) + getString(R.string.coolwalk_tweak));
-            changeStatus(nocoolwalkTweakStatus, 2, false);
-        } else {
-            nocoolwalkTweak.setText(getString(R.string.force_disable_tweak) + getString(R.string.coolwalk_tweak));
-            changeStatus(nocoolwalkTweakStatus, 0, false);
-        }
-        registerReconcileTarget("aa_deactivate_coolwalk", nocoolwalkTweakStatus, nocoolwalkTweak,
-                getString(R.string.re_enable_tweak_string) + getString(R.string.coolwalk_tweak),
-                getString(R.string.force_disable_tweak) + getString(R.string.coolwalk_tweak));
-
-        nocoolwalkTweak.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-
-                        if (load ("aa_deactivate_coolwalk")) {
-
-                            nocoolwalkTweak.setText(getString(R.string.force_disable_tweak) + getString(R.string.coolwalk_tweak));
-                            changeStatus(nocoolwalkTweakStatus, 2, true);
-                            revert("aa_deactivate_coolwalk");
-                        } else {
-                            if (load ("aa_activate_coolwalk")) {
-                                revert("aa_activate_coolwalk");
-                                coolwalkTweak.setText(getString(R.string.enable_tweak_string) + getString(R.string.coolwalk_tweak));
-                                changeStatus(coolwalkTweakStatus,0,false);
-                            }
-                            deactivateCoolwalk();
-                        }
-
-                    }
-                });
-
-        setOnLongClickListener(nocoolwalkTweak, R.string.tutorial_nocoolwalk);
-
-
         assistantTipsButton = findViewById(R.id.assistanttips_tweak_button);
         assistantTipsTweakStatus = findViewById(R.id.assistanttips_tweak_status);
 
@@ -1841,55 +1631,57 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void revert(final String toRevert) {
-
         final TextView logs = getLogsView();
-
-
         new Thread() {
             @Override
             public void run() {
-                // The tweak is being turned off: clear any reboot-pending marker so it can't
-                // linger as yellow after a revert (covers both the phixit and legacy paths below).
-                tweakStateStore.setRebootPending(toRevert, false);
-                // Migrated (phixit) tweaks: their flags live in the Phenotype param_partitions
-                // blobs, which the legacy "DROP TRIGGER + DELETE FROM FlagOverrides" path below
-                // does NOT touch. So we must always go through the phixit engine here, regardless
-                // of whether a baseline was captured:
-                //   - With a baseline (applied by a current build): restore the captured value,
-                //     which drops appended flags back to "absent".
-                //   - Without a baseline (applied by an old pre-baseline build, then reverted):
-                //     explicitly REMOVE the tweak's override flags from the blobs.
-                // Either way isAppliedStrict() reads FALSE afterwards, so the post-launch
-                // reconcile cannot "heal" a deliberately-disabled tweak back to green.
-                if (PhixitTweaks.has(toRevert)) {
-                    appendText(logs, "\n\n--  Reverting (phixit): " + toRevert + "  --");
-                    if (hasBaseline(toRevert)) {
-                        revertPhixitSpecs(logs, PhixitTweaks.specs(toRevert));
-                    } else {
-                        // No baseline to restore — strip the tweak's flags outright so they no
-                        // longer linger in the DB and resurrect the tweak on next launch.
-                        appendText(logs, "\n\tno baseline captured; removing override flags");
-                        applyPhixitSpecs(logs, removeSpecsFor(PhixitTweaks.specs(toRevert)), false);
-                    }
-                    save(false, toRevert);
-                    return;
-                }
-
-                String path = getApplicationInfo().dataDir;
-
-                save(false, toRevert);
-
-                appendText(logs, "\n\n-- Reverting the hack  --");
-                RootDb.exec(PHENO_DB, java.util.Arrays.asList(
-                        "DROP TRIGGER IF EXISTS " + toRevert,
-                        "DELETE FROM FlagOverrides"));
-                appendText(logs, "\n\tdropped trigger " + toRevert + " and cleared FlagOverrides");
+                revertTweakBlocking(toRevert, logs);
             }
-
-
         }.start();
+    }
 
+    /**
+     * Reverts one tweak on the calling thread (which must not be the main thread). Shared by
+     * {@link #revert} and by applying a preset / imported config, so both go through the exact
+     * same revert logic.
+     */
+    private void revertTweakBlocking(final String toRevert, final TextView logs) {
+        // The tweak is being turned off: clear any reboot-pending marker so it can't
+        // linger as yellow after a revert (covers both the phixit and legacy paths below).
+        tweakStateStore.setRebootPending(toRevert, false);
+        // Migrated (phixit) tweaks: their flags live in the Phenotype param_partitions
+        // blobs, which the legacy "DROP TRIGGER + DELETE FROM FlagOverrides" path below
+        // does NOT touch. So we must always go through the phixit engine here, regardless
+        // of whether a baseline was captured:
+        //   - With a baseline (applied by a current build): restore the captured value,
+        //     which drops appended flags back to "absent".
+        //   - Without a baseline (applied by an old pre-baseline build, then reverted):
+        //     explicitly REMOVE the tweak's override flags from the blobs.
+        // Either way isAppliedStrict() reads FALSE afterwards, so the post-launch
+        // reconcile cannot "heal" a deliberately-disabled tweak back to green.
+        if (PhixitTweaks.has(toRevert)) {
+            appendText(logs, "\n\n--  Reverting (phixit): " + toRevert + "  --");
+            if (hasBaseline(toRevert)) {
+                revertPhixitSpecs(logs, PhixitTweaks.specs(toRevert));
+            } else {
+                // No baseline to restore — strip the tweak's flags outright so they no
+                // longer linger in the DB and resurrect the tweak on next launch.
+                appendText(logs, "\n\tno baseline captured; removing override flags");
+                applyPhixitSpecs(logs, removeSpecsFor(PhixitTweaks.specs(toRevert)), false);
+            }
+            save(false, toRevert);
+            return;
+        }
 
+        String path = getApplicationInfo().dataDir;
+
+        save(false, toRevert);
+
+        appendText(logs, "\n\n-- Reverting the hack  --");
+        RootDb.exec(PHENO_DB, java.util.Arrays.asList(
+                "DROP TRIGGER IF EXISTS " + toRevert,
+                "DELETE FROM FlagOverrides"));
+        appendText(logs, "\n\tdropped trigger " + toRevert + " and cleared FlagOverrides");
     }
 
     private boolean hasBaseline(String key) {
@@ -1981,6 +1773,31 @@ public class MainActivity extends AppCompatActivity {
                     setOnLongClickListener(b, R.string.settings_reapply_desc);
                     break;
                 }
+                case COMPAT_CHECK: {
+                    Button b = findViewById(R.id.settings_compat);
+                    b.setOnClickListener(v -> runCompatibilityCheck());
+                    setOnLongClickListener(b, R.string.settings_compat_desc);
+                    break;
+                }
+                case PRESETS: {
+                    Button b = findViewById(R.id.settings_presets);
+                    b.setOnClickListener(v -> showPresetsDialog());
+                    setOnLongClickListener(b, R.string.settings_presets_desc);
+                    break;
+                }
+                case EXPORT_CONFIG: {
+                    Button b = findViewById(R.id.settings_export);
+                    b.setOnClickListener(v -> exportConfig());
+                    setOnLongClickListener(b, R.string.settings_export_desc);
+                    break;
+                }
+                case IMPORT_CONFIG: {
+                    Button b = findViewById(R.id.settings_import);
+                    b.setOnClickListener(v -> importConfigLauncher.launch(
+                            new String[]{"text/plain", "application/octet-stream"}));
+                    setOnLongClickListener(b, R.string.settings_import_desc);
+                    break;
+                }
                 case AA_SETTINGS: {
                     Button b = findViewById(R.id.settings_aa);
                     b.setOnClickListener(v -> openAndroidAutoSettings());
@@ -2063,6 +1880,411 @@ public class MainActivity extends AppCompatActivity {
                         (dialog, id) -> dialog.cancel());
         builder.setCancelable(true);
         builder.create().show();
+    }
+
+    // ------------------------------------------------------------------------------------
+    // Compatibility check, presets, export / import
+    // ------------------------------------------------------------------------------------
+
+    private static final String CONFIG_FILE_NAME = "androidautox_tweaks.txt";
+    private static final String GEARHEAD_PKG = "com.google.android.projection.gearhead";
+
+    /** Picks a tweak file to import; the result is parsed, previewed, then applied on confirm. */
+    private final androidx.activity.result.ActivityResultLauncher<String[]> importConfigLauncher =
+            registerForActivityResult(
+                    new androidx.activity.result.contract.ActivityResultContracts.OpenDocument(),
+                    uri -> {
+                        if (uri != null) readConfigFrom(uri);
+                    });
+
+    /** The tweaks currently recorded as on (after the post-root reconcile has run). */
+    private TweakConfig currentConfig() {
+        return TweakConfig.fromPrefs(getPreferences(Context.MODE_PRIVATE));
+    }
+
+    /** "aa_six_tap" -> "six tap": good enough to recognise a tweak in a list. */
+    private static String readableTweakName(String key) {
+        String name = key.startsWith("aa_") ? key.substring(3) : key;
+        return name.replace('_', ' ');
+    }
+
+    private static String readableTweakNames(java.util.Collection<String> keys) {
+        StringBuilder sb = new StringBuilder();
+        for (String key : keys) {
+            if (sb.length() > 0) sb.append(", ");
+            sb.append(readableTweakName(key));
+        }
+        return sb.toString();
+    }
+
+    private boolean canShowDialogs() {
+        return !isFinishing() && !isDestroyed() && !activityDestroyed;
+    }
+
+    // ---- compatibility check
+
+    /**
+     * Scans the installed Android Auto APK(s) for each tweak's flag names and shows which
+     * tweaks reference flags that app no longer mentions. Advisory only; see
+     * {@link TweakCompatibility}.
+     */
+    private void runCompatibilityCheck() {
+        final ProgressDialog progress = ProgressDialog.show(MainActivity.this, "",
+                getString(R.string.compat_checking), true);
+        final Context app = getApplicationContext();
+        new Thread() {
+            @Override
+            public void run() {
+                java.util.List<TweakCompatibility.Result> results = null;
+                String error = null;
+                boolean notInstalled = false;
+                try {
+                    ApplicationInfo info = getPackageManager().getApplicationInfo(GEARHEAD_PKG, 0);
+                    java.util.List<java.io.File> apks = new java.util.ArrayList<java.io.File>();
+                    apks.add(new java.io.File(info.sourceDir));
+                    if (info.splitSourceDirs != null) {
+                        for (String split : info.splitSourceDirs) apks.add(new java.io.File(split));
+                    }
+                    java.util.LinkedHashMap<String, java.util.List<FlagSpec>> specsByKey =
+                            new java.util.LinkedHashMap<String, java.util.List<FlagSpec>>();
+                    for (String key : TweakRegistry.ALL_KEYS) {
+                        specsByKey.put(key, TweakRegistry.specsFor(app, key));
+                    }
+                    java.util.Set<String> present = FlagPresence.scanApks(apks,
+                            TweakCompatibility.gearheadNames(specsByKey.values()));
+                    results = new java.util.ArrayList<TweakCompatibility.Result>();
+                    for (Map.Entry<String, java.util.List<FlagSpec>> e : specsByKey.entrySet()) {
+                        results.add(TweakCompatibility.evaluate(e.getKey(), e.getValue(), present));
+                    }
+                    TweakCompatibility.sortForDisplay(results);
+                } catch (PackageManager.NameNotFoundException e) {
+                    notInstalled = true;
+                } catch (IOException | RuntimeException e) {
+                    error = String.valueOf(e.getMessage());
+                } catch (OutOfMemoryError e) {
+                    error = "out of memory";
+                }
+
+                final java.util.List<TweakCompatibility.Result> finalResults = results;
+                final String finalError = error;
+                final boolean finalNotInstalled = notInstalled;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        progress.dismiss();
+                        if (!canShowDialogs()) return;
+                        String message;
+                        if (finalNotInstalled) {
+                            message = getString(R.string.compat_not_installed);
+                        } else if (finalError != null) {
+                            message = getString(R.string.compat_failed, finalError);
+                        } else {
+                            message = describeCompatibility(finalResults);
+                        }
+                        new androidx.appcompat.app.AlertDialog.Builder(MainActivity.this)
+                                .setTitle(R.string.compat_title)
+                                .setMessage(message)
+                                .setPositiveButton(android.R.string.ok, null)
+                                .show();
+                    }
+                });
+            }
+        }.start();
+    }
+
+    private String describeCompatibility(java.util.List<TweakCompatibility.Result> results) {
+        int checkable = 0;
+        int supported = 0;
+        int unchecked = 0;
+        StringBuilder problems = new StringBuilder();
+        for (TweakCompatibility.Result r : results) {
+            switch (r.status) {
+                case UNKNOWN:
+                    unchecked++;
+                    break;
+                case SUPPORTED:
+                    checkable++;
+                    supported++;
+                    break;
+                case PARTIAL:
+                    checkable++;
+                    problems.append("\n• ").append(getString(R.string.compat_line_partial,
+                            readableTweakName(r.key), r.found, r.total));
+                    break;
+                default: // MISSING
+                    checkable++;
+                    problems.append("\n• ").append(getString(R.string.compat_line_missing,
+                            readableTweakName(r.key), r.total));
+                    break;
+            }
+        }
+        StringBuilder msg = new StringBuilder();
+        if (problems.length() == 0) {
+            msg.append(getString(R.string.compat_all_good, checkable));
+        } else {
+            msg.append(getString(R.string.compat_summary, supported, checkable)).append(problems);
+        }
+        if (unchecked > 0) {
+            msg.append("\n\n").append(getString(R.string.compat_unchecked, unchecked));
+        }
+        msg.append("\n\n").append(getString(R.string.compat_disclaimer));
+        return msg.toString();
+    }
+
+    // ---- export / import
+
+    private void exportConfig() {
+        final TweakConfig config = currentConfig();
+        if (config.isEmpty()) {
+            Toast.makeText(getApplicationContext(), R.string.config_nothing_to_export,
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+        final Context app = getApplicationContext();
+        new Thread() {
+            @Override
+            public void run() {
+                final boolean wrote = writeToDownloads(app, CONFIG_FILE_NAME, "text/plain",
+                        config.serialize());
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(app, wrote
+                                ? getString(R.string.config_exported, CONFIG_FILE_NAME)
+                                : getString(R.string.config_export_failed), Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        }.start();
+    }
+
+    /** Reads and parses the chosen file off the main thread, then offers to apply it. */
+    private void readConfigFrom(final Uri uri) {
+        new Thread() {
+            @Override
+            public void run() {
+                TweakConfig parsed = null;
+                String error = null;
+                try (InputStream in = getContentResolver().openInputStream(uri)) {
+                    if (in == null) throw new IOException("could not open the file");
+                    java.io.Reader reader = new java.io.InputStreamReader(in,
+                            java.nio.charset.StandardCharsets.UTF_8);
+                    // Read one char past the limit so parse() rejects an oversized file without
+                    // ever holding the whole of it in memory.
+                    StringBuilder text = new StringBuilder();
+                    char[] buf = new char[2048];
+                    int limit = TweakConfig.MAX_TEXT_CHARS + 1;
+                    int n;
+                    while (text.length() < limit
+                            && (n = reader.read(buf, 0, Math.min(buf.length, limit - text.length()))) != -1) {
+                        text.append(buf, 0, n);
+                    }
+                    parsed = TweakConfig.parse(text.toString());
+                } catch (IOException | SecurityException | IllegalArgumentException e) {
+                    error = String.valueOf(e.getMessage());
+                }
+                final TweakConfig finalParsed = parsed;
+                final String finalError = error;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (!canShowDialogs()) return;
+                        if (finalParsed == null) {
+                            Toast.makeText(getApplicationContext(),
+                                    getString(R.string.config_import_failed, finalError),
+                                    Toast.LENGTH_LONG).show();
+                        } else {
+                            confirmApplyConfig(getString(R.string.config_apply_title), finalParsed);
+                        }
+                    }
+                });
+            }
+        }.start();
+    }
+
+    // ---- presets
+
+    private TweakPresets presets() {
+        return new TweakPresets(getSharedPreferences(TweakPresets.PREFS_NAME, Context.MODE_PRIVATE));
+    }
+
+    private void showPresetsDialog() {
+        final TweakPresets presets = presets();
+        final java.util.List<String> names = presets.names();
+        String[] items = new String[names.size() + 1];
+        items[0] = getString(R.string.presets_save_current);
+        for (int i = 0; i < names.size(); i++) items[i + 1] = names.get(i);
+        new androidx.appcompat.app.AlertDialog.Builder(MainActivity.this)
+                .setTitle(R.string.presets_title)
+                .setItems(items, (dialog, which) -> {
+                    if (which == 0) {
+                        promptSavePreset(presets);
+                    } else {
+                        showPresetActions(presets, names.get(which - 1));
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
+    }
+
+    private void promptSavePreset(final TweakPresets presets) {
+        final TweakConfig config = currentConfig();
+        if (config.isEmpty()) {
+            Toast.makeText(getApplicationContext(), R.string.presets_nothing_to_save,
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+        final android.widget.EditText input = new android.widget.EditText(MainActivity.this);
+        input.setHint(R.string.presets_name_hint);
+        input.setSingleLine(true);
+        input.setFilters(new android.text.InputFilter[]{
+                new android.text.InputFilter.LengthFilter(TweakPresets.MAX_NAME_LENGTH)});
+        new androidx.appcompat.app.AlertDialog.Builder(MainActivity.this)
+                .setTitle(R.string.presets_save_current)
+                .setView(input)
+                .setPositiveButton(R.string.presets_save, (dialog, which) -> {
+                    String name = TweakPresets.normalizeName(input.getText().toString());
+                    TweakPresets.SaveResult result = presets.save(name, config);
+                    int message;
+                    switch (result) {
+                        case SAVED:
+                            message = R.string.presets_saved;
+                            break;
+                        case REPLACED:
+                            message = R.string.presets_replaced;
+                            break;
+                        case TOO_MANY:
+                            message = R.string.presets_too_many;
+                            break;
+                        default: // INVALID_NAME
+                            message = R.string.presets_invalid_name;
+                            break;
+                    }
+                    String text;
+                    if (result == TweakPresets.SaveResult.TOO_MANY) {
+                        text = getString(message, TweakPresets.MAX_PRESETS);
+                    } else if (result == TweakPresets.SaveResult.INVALID_NAME) {
+                        text = getString(message, TweakPresets.MAX_NAME_LENGTH);
+                    } else {
+                        text = getString(message, name);
+                    }
+                    Toast.makeText(getApplicationContext(), text, Toast.LENGTH_LONG).show();
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
+    }
+
+    private void showPresetActions(final TweakPresets presets, final String name) {
+        new androidx.appcompat.app.AlertDialog.Builder(MainActivity.this)
+                .setTitle(name)
+                .setPositiveButton(R.string.presets_apply, (dialog, which) -> {
+                    TweakConfig preset = presets.get(name);
+                    if (preset == null) {
+                        Toast.makeText(getApplicationContext(), R.string.presets_missing,
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        confirmApplyConfig(name, preset);
+                    }
+                })
+                .setNeutralButton(R.string.presets_delete, (dialog, which) -> {
+                    presets.delete(name);
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.presets_deleted, name), Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
+    }
+
+    // ---- applying a config (preset or import)
+
+    /** Shows what would change, and applies it only if the user confirms. */
+    private void confirmApplyConfig(String title, final TweakConfig target) {
+        final TweakConfig.Diff diff = TweakConfig.diff(currentConfig(), target);
+        if (diff.isEmpty()) {
+            Toast.makeText(getApplicationContext(), R.string.config_already_matches,
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+        StringBuilder msg = new StringBuilder();
+        if (!diff.toEnable.isEmpty()) {
+            msg.append(getString(R.string.config_apply_enable,
+                    readableTweakNames(diff.toEnable))).append("\n\n");
+        }
+        if (!diff.toDisable.isEmpty()) {
+            msg.append(getString(R.string.config_apply_disable,
+                    readableTweakNames(diff.toDisable))).append("\n\n");
+        }
+        if (target.skippedCount() > 0) {
+            msg.append(getString(R.string.config_apply_skipped, target.skippedCount())).append("\n\n");
+        }
+        msg.append(getString(R.string.config_apply_note));
+        new androidx.appcompat.app.AlertDialog.Builder(MainActivity.this)
+                .setTitle(title)
+                .setMessage(msg.toString())
+                .setPositiveButton(R.string.config_apply_button,
+                        (dialog, which) -> applyConfig(target, diff))
+                .setNegativeButton(android.R.string.cancel, null)
+                .show();
+    }
+
+    /**
+     * Turns off the tweaks that must go (each through the normal revert path), then turns on
+     * everything that must come on in a single engine call so Google Play services is
+     * restarted once for the whole batch. Saved slider values are only updated after that apply
+     * succeeds, so a failure leaves the previous values in place.
+     */
+    private void applyConfig(final TweakConfig target, final TweakConfig.Diff diff) {
+        final TextView logs = getLogsView();
+        final Context app = getApplicationContext();
+        final ProgressDialog dialog = ProgressDialog.show(MainActivity.this, "",
+                getString(R.string.tweak_loading), true);
+        new Thread() {
+            @Override
+            public void run() {
+                appendText(logs, "\n\n--  Applying configuration  --");
+                for (String key : diff.toDisable) {
+                    revertTweakBlocking(key, logs);
+                }
+                boolean ok = true;
+                if (!diff.toEnable.isEmpty()) {
+                    java.util.List<FlagSpec> specs = new java.util.ArrayList<FlagSpec>();
+                    for (String key : diff.toEnable) {
+                        java.util.List<FlagSpec> keySpecs = TweakRegistry.specsFor(app, target, key);
+                        if (keySpecs != null) specs.addAll(keySpecs);
+                    }
+                    ok = applyPhixitSpecs(logs, specs, true);
+                    if (ok) {
+                        SharedPreferences.Editor editor = getPreferences(Context.MODE_PRIVATE).edit();
+                        target.writeValuesTo(editor);
+                        editor.commit();
+                        for (String key : diff.toEnable) {
+                            save(true, key);
+                            tweakStateStore.setRebootPending(key, true);
+                        }
+                    }
+                }
+                final boolean success = ok;
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialog.dismiss();
+                        if (!canShowDialogs()) return;
+                        if (success) {
+                            showRebootButton();
+                            // Repaint every tweak's status from the new saved state.
+                            recreate();
+                        } else {
+                            DialogFragment notSuccessfulDialog = new NotSuccessfulDialog();
+                            Bundle bundle = new Bundle();
+                            bundle.putString("tweak", "configuration");
+                            bundle.putString("log", logs.getText().toString());
+                            notSuccessfulDialog.setArguments(bundle);
+                            notSuccessfulDialog.show(getSupportFragmentManager(), "NotSuccessfulDialog");
+                        }
+                    }
+                });
+            }
+        }.start();
     }
 
     /** Opens the Android Auto (Gearhead) settings app. */
@@ -2369,9 +2591,6 @@ public class MainActivity extends AppCompatActivity {
         applyPhixitTweak("aa_six_tap", taplimitstatus, taplimitat, getString(R.string.disable_speed_limitations));
     }
 
-    public void coolwalkdaynightpatch() {
-        applyPhixitTweak("coolwalk_daynight_tweak", navstatus, null, null);
-    }
 
 
 
@@ -2453,14 +2672,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void activateCoolwalk() {
-        applyPhixitTweak("aa_activate_coolwalk", coolwalkTweakStatus, null, null);
-    }
-
-    public void deactivateCoolwalk() {
-        applyPhixitTweak("aa_deactivate_coolwalk", nocoolwalkTweakStatus, nocoolwalkTweak, getString(R.string.coolwalk_tweak));
-    }
-
     public void activateMaterialYou() {
         applyPhixitTweak("aa_material_you", materialYouTweakStatus, null, null);
     }
@@ -2513,16 +2724,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void disableTelemetry() {
         applyPhixitTweak("kill_telemetry", telemetryStatus, disableTelemetryButton, getString(R.string.telemetry_string));
-    }
-
-    public void uxprototypeTweak(URL url) {
-        // Thread the user-entered URL through the dynamic-value path so it lands in the
-        // UxPrototype__url flag (instead of a placeholder). Persist it so the headless
-        // re-apply job can reconstruct the same value.
-        String urlString = url.toString();
-        saveString(urlString, "uxprototype_url");
-        applyPhixitTweakSpecs("uxprototype_tweak", TweakRegistry.uxPrototypeSpecs(urlString),
-                uxprototypeTweakStatus, uxprototypeButton, getString(R.string.uxprototype_tweak));
     }
 
     public void setHunDuration(View view, final int value) {

@@ -118,11 +118,7 @@ UPOZORNENIE: Toto vylepšenie nebolo dôkladne testované a môže potenciálne 
     <string name="remove_paired_car">Odobrať spárované vozidlo</string>
     <string name="choose_cars">Výber auta (áut)</string>
     <string name="tutorial_carremover">Vedeli ste, že Android Auto vie odstrániť iba všetky spárované autá a nemôžete odstrániť jedno po druhom? Táto možnosť vám pomôže, ak chcete vymazať jednotlivo autá z Android Auto, stačí zvoliť, ktoré auto (autá) chcete, a to bude odstránené.</string>
-    <string name="coolwalk_daynight_tweak">Svetlý/Tmavý Coolwalk</string>
-    <string name="coolwalk_daynight_tutorial">Toto vylepšenie aktivuje denný/nočný režim pre režim Coolwalk. Momentálne to vyzerá ako nefunkčné a nevie si dobre poradiť s prepínačom.</string>
     <string name="custom_hotseat_option">Vlastná možnosť miesta</string>
-    <string name="tutorial_coolwalk">Toto vylepšenie aktivuje nový dizajn v Android Auto (kódové označenie Coolwalk), ktorý je možné prepínať v nastaveniach Android Auto a ktorý trochu upraví vzhľad na menších obrazovkách. Tento dizajn obsahuje vždy zapnutý bočný panel a rôzne grafické prvky. Táto funkcia je momentálne v počiatočnom štádiu. Vyžaduje sa Android Auto 6.9 alebo vyšší.</string>
-    <string name="coolwalk_tweak">Coolwalk dizajn</string>
     <string name="tutorial_focus_settings">Toto vylepšenie aktivuje nové možnosti v nastaveniach Android Auto na manuálne prispôsobenie toho, či sa Android Auto musí spustiť hneď po pripojení telefónu k autu. Vyžaduje sa Android Auto 6.8 alebo vyšší.</string>
     <string name="focus_tweak">Nastavenia Focus</string>
     <string name="assistant_tips">Tipy asistenta</string>
@@ -138,12 +134,8 @@ UPOZORNENIE: Toto vylepšenie nebolo dôkladne testované a môže potenciálne 
     <string name="warning_patch_apps">POZOR! Táto operácia VYMAŽE VŠETKY ÚDAJE z vybratých aplikácií. Uistite sa, že máte zálohu údajov. Chcete napriek tomu pokračovať?</string>
     <string name="tappable_progress">Nový panel priebehu</string>
     <string name="tappable_progress_tutorial">Nakoniec sme získali dotykový panel priebehu pre to, čo hrá v systéme Android Auto. Áno, môžeme vyhľadávať cez aktuálnu skladbu Vyžaduje Android Auto 8.3 alebo vyšší.</string>
-    <string name="uxprototype_tutorial">Všetko, čo toto vylepšenie robí, je v podstate vytvorenie bezplatnej skratky na domovskej stránke na otvorenie webovej stránky. Zahŕňa veľkonočné vajíčko skryté v Android Auto vydanom 1. apríla 2022. Aktivujte „Režim vývojára“ v „Nastavenia vývojára“ v časti „Režim aplikácie“. Je to jediný spôsob, ako mať aktuálnu aplikáciu na celú obrazovku v systéme Android Auto práve teraz. UPOZORNENIE: Nie je možné ho použiť, ak ho plánujete použiť iba na svojom aute. A tiež chýba tlačidlo späť.</string>
-    <string name="uxprototype_dialog">Zadajte platnú adresu URL</string>
-    <string name="uxprototype_tweak">Nastavenie vlastných skratiek</string>
     <string name="tutorial_new_seekbar">"Toto vylepšenie umožňuje pohyblivý panel vyhľadávania pre mediálne aplikácie."</string>
     <string name="tutorial_materialyou">"Toto vylepšenie umožňuje spôsob, ktorým upravíte nastavenia Android Auto v telefóne. Správne to funguje iba v systéme Android Auto 8.8&gt; bolo testované"</string>
-    <string name="tutorial_nocoolwalk">Úplne neznášaš Coolwalk? Toto vylepšenie je pre vás.</string>
     <string name="portrait_layout">Force vertical layout</string>
     <string name="tutorial_portrait">Toto vylepšenie si vynúti rozloženie na výšku v systéme Android Auto s ovládacím panelom v spodnej časti.</string>
     <string name="inertial_scroll_tweak">Inertial scroll</string>

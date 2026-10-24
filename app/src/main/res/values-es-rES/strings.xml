@@ -118,11 +118,7 @@ ADVERTENCIA: Esta modificación no ha sido probada extensivamente y podría pote
     <string name="remove_paired_car">Eliminar un coche emparejado</string>
     <string name="choose_cars">Elegir coche(s)</string>
     <string name="tutorial_carremover">¿Sabías que sólo se pueden quitar los coches emparejados en Android Auto todos a la vez, y no de uno en uno? Esta opción te rescatará si quieres eliminar coches individuales en Android Auto; sólo tienes que seleccionar el(los) coche(s) que deseas y se eliminará(n).</string>
-    <string name="coolwalk_daynight_tweak">Coolwalk Claro/Oscuro</string>
-    <string name="coolwalk_daynight_tutorial">Este ajuste activará el modo diurno/nocturno para el modo Coolwalk. Parece que está algo roto ahora mismo y no cambia de modo muy bien.</string>
     <string name="custom_hotseat_option">Opción de asientos personalizada</string>
-    <string name="tutorial_coolwalk">Esta modificación activará un nuevo diseño en Android Auto (con nombre en clave Coolwalk), que se puede activar en la configuración de Android Auto, y que ajusta ligeramente la apariencia en pantallas más pequeñas. Este diseño presenta un panel lateral siempre visible y con apariencia gráfica diferente. Esta característica está en su fase inicial de momento. Se requiere Android Auto 6.9 o superior.</string>
-    <string name="coolwalk_tweak">Diseño Coolwalk</string>
     <string name="tutorial_focus_settings">Este ajuste activará una nueva opcion en los ajustes de Android Auto para personalizar manualmente si Android Auto debe ser ejecutado tan pronto como conectes tu teléfono al coche. Android Auto 6.8 o superior es necesario.</string>
     <string name="focus_tweak">Ajustes de concentración</string>
     <string name="assistant_tips">Consejos del Asistente</string>
@@ -138,12 +134,8 @@ ADVERTENCIA: Esta modificación no ha sido probada extensivamente y podría pote
     <string name="warning_patch_apps">¡Advertencia! Esta operación BORRARÁ TODOS LOS DATOS de la(s) aplicación(es) seleccionada(s). Por favor, asegúrate de que tienes un respaldo de los datos. ¿Deseas proceder de todas formas?</string>
     <string name="tappable_progress">Nueva barra de progreso</string>
     <string name="tappable_progress_tutorial">Por fin disponemos de una barra de progreso deslizable para ajustar lo que está sonando en Android Auto. Sí, podemos desplazarnos por la pista que se está reproduciendo en este momento. Se requiere de Android Auto 8.3 o superior.</string>
-    <string name="uxprototype_tutorial">Todo lo que hace este ajuste es básicamente crear un atajo gratuito en la página de inicio para abrir una página web. Implica un Huevo de Pascua oculto en Android Auto lanzado el 1 de abril de 2022. Activa el \"Modo de desarrollador\" en \"Configuración de desarrolladores\" bajo \"Modo de aplicación\". Es la única manera de tener una aplicación de pantalla completa en Android Auto ahora mismo. ATENCIÓN: No se podrá salir una vez abierto; use esto solo si planea usar esta función en su coche. Tampoco habrá botón de retroceso. </string>
-    <string name="uxprototype_dialog">Introduzca una URL completa válida</string>
-    <string name="uxprototype_tweak">Atajo personalizado</string>
     <string name="tutorial_new_seekbar">"Este ajuste permite activar la barra de búsqueda deslizable para las aplicaciones multimedia."</string>
     <string name="tutorial_materialyou">"Este ajuste aplica el estilo Material You a la configuración de Android Auto en el teléfono. Según ha sido probado esto sólo funciona correctamente en Android Auto 8.8 o superior"</string>
-    <string name="tutorial_nocoolwalk">¿Detestas Coolwalk? Este ajuste es para ti.</string>
     <string name="portrait_layout">Forzar diseño vertical</string>
     <string name="tutorial_portrait">Este ajuste forzará el diseño vertical de Android Auto con el panel de control en la parte inferior.</string>
     <string name="inertial_scroll_tweak">Desplazamiento inercial</string>

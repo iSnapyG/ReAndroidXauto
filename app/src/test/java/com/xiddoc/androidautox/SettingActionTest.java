@@ -31,6 +31,10 @@ public class SettingActionTest {
         List<SettingAction> expected = Arrays.asList(
                 SettingAction.RESET_TWEAKS,
                 SettingAction.AUTO_REAPPLY,
+                SettingAction.COMPAT_CHECK,
+                SettingAction.PRESETS,
+                SettingAction.EXPORT_CONFIG,
+                SettingAction.IMPORT_CONFIG,
                 SettingAction.AA_SETTINGS,
                 SettingAction.AUTO_BACKUP_DBS,
                 SettingAction.PHIXIT_APPLY_TEST,
@@ -54,6 +58,10 @@ public class SettingActionTest {
         List<SettingAction> expected = Arrays.asList(
                 SettingAction.RESET_TWEAKS,
                 SettingAction.AUTO_REAPPLY,
+                SettingAction.COMPAT_CHECK,
+                SettingAction.PRESETS,
+                SettingAction.EXPORT_CONFIG,
+                SettingAction.IMPORT_CONFIG,
                 SettingAction.AA_SETTINGS,
                 SettingAction.AUTO_BACKUP_DBS,
                 SettingAction.DEV_MODE_TOGGLE);

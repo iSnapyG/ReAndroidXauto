@@ -128,11 +128,7 @@ WARNING: This tweak has not been extensively tested and could potentially break 
     <string name="remove_paired_car">Odstranit spárované vozidlo</string>
     <string name="choose_cars">Vyberte vozidlo(a)</string>
     <string name="tutorial_carremover">Věděli jste, že si v Android Auto nemůžete vybrat, které vozidlo chcete odstranit a můžete odstranit pouze všechna vozidla najednou? Tato volba vás zachrání, když chcete smazat jen jedno vozidlo. Stačí si vybrat, které z aut chcete smazat a potvrdit.</string>
-    <string name="coolwalk_daynight_tweak">Light/Dark Coolwalk</string>
-    <string name="coolwalk_daynight_tutorial">This tweak will activate day/night mode for Coolwalk mode. Looks kind of broken right now and can\'t handle switch very well.</string>
     <string name="custom_hotseat_option">Uživatelská volba pozice řidiče</string>
-    <string name="tutorial_coolwalk">Toto nastavení aktivuje nový design v Android Auto (kódové označení Coolwalk), které je možno zapnout v nastavení Android Auto. Toto nastavení lehce upraví vzhled na menších obrazovkách. Tento design obsahuje vždy zobrazený postranní panel a změněnou grafiku. Tato funkce je v současnosti stále v rané fázi vývoje. Je vyžadováno Android Auto 6.9 nebo vyšší.</string>
-    <string name="coolwalk_tweak">Design Coolwalk</string>
     <string name="tutorial_focus_settings">Toro nastavení aktivuje novou volbu uvnitř nastavení Android Auto, které umožní manuálně přizpůsobit, co se má spustit po připojení telefonu k autu. Je vyžadováno Android Auto 6.8 nebo vyšší.</string>
     <string name="focus_tweak">Nastavení soustředění</string>
     <string name="assistant_tips">Assistant tips</string>
@@ -148,12 +144,8 @@ WARNING: This tweak has not been extensively tested and could potentially break 
     <string name="warning_patch_apps">Warning! This operation will ERASE ALL THE DATA from the selected app(s). Please make sure you have a backup of the data. Do you want to proceed anyways?</string>
     <string name="tappable_progress">New progress bar</string>
     <string name="tappable_progress_tutorial">Finally we are gaining a touchable progress bar for what\'s playing on Android Auto. Yes, we can seek through the current track Requires Android Auto 8.3 or superior.</string>
-    <string name="uxprototype_tutorial">All this tweak does is basically creates a free shortcut on the home page to open a web page. It involves an Easter egg hidden in Android Auto released on 1st of April 2022. Activate \"Developer mode\" in \"Developer settings\" under \"Application mode\". It\'s the only way to have an actual fullscreen app on Android Auto right now. WARNING: Not exitable, use this if you only plan on using this on your car. There\'s no back button either.</string>
-    <string name="uxprototype_dialog">Enter a valid full URL</string>
-    <string name="uxprototype_tweak">Custom shortcut</string>
     <string name="tutorial_new_seekbar">"This tweak enables a movable seekbar for media apps."</string>
     <string name="tutorial_materialyou">"This tweak enables material you style for the Android Auto's settings on the phone. This properly works only on Android Auto 8.8&gt; as tested"</string>
-    <string name="tutorial_nocoolwalk">Are you absolutely hating Coolwalk? This tweak is for you.</string>
     <string name="portrait_layout">Force vertical layout</string>
     <string name="tutorial_portrait">This tweak will force the portrait layout of Android Auto with dashboard on the bottom.</string>
     <string name="inertial_scroll_tweak">Inertial scroll</string>

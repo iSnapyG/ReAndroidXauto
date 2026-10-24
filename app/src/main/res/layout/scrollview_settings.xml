@@ -65,6 +65,42 @@
             android:text="@string/settings_reapply_label" />
 
         <Button
+            android:id="@+id/settings_compat"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/settings_compat_label" />
+
+        <Button
+            android:id="@+id/settings_presets"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/settings_presets_label" />
+
+        <Button
+            android:id="@+id/settings_export"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/settings_export_label" />
+
+        <Button
+            android:id="@+id/settings_import"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="@string/settings_import_label" />
+
+        <Button
             android:id="@+id/settings_aa"
             style="@style/ButtonStyle"
             android:layout_width="match_parent"

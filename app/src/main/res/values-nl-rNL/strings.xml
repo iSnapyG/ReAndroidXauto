@@ -116,11 +116,7 @@ WAARSCHUWING: Deze tweak is niet uitgebreid getest en kan Android Auto mogelijk 
     <string name="remove_paired_car">Verwijder een gekoppelde auto</string>
     <string name="choose_cars">Kies auto(s)</string>
     <string name="tutorial_carremover">Wist je dat je alleen alle gekoppelde auto\'s van Android Auto kunt verwijderen en dat je ze niet één voor één kunt verwijderen? Deze optie zal je helpen indien je een auto van Android Auto wilt verwijderen, selecteer gewoon welke auto(s) je wilt en zij/zij zullen worden verwijderd.</string>
-    <string name="coolwalk_daynight_tweak">Licht/Donker Coolwalk</string>
-    <string name="coolwalk_daynight_tutorial">Deze tweak activeert de dag/nacht modus voor Coolwalk. Dit lijkt op dit moment nog niet erg te werken en kan de schakelaar nog niet goed verwerken.</string>
     <string name="custom_hotseat_option">Zitplaats optie</string>
-    <string name="tutorial_coolwalk">Deze tweak zal een nieuw ontwerp activeren in Android Auto (codename Coolwalk) dat kan worden ingeschakeld in Android Auto\'s instellingen en dat het uiterlijk een beetje verandert op kleinere schermen. Dit ontwerp bevat een \"altijd aan\"-zijpaneel en een aantal verschillende afbeeldingen. Deze functie is op dit moment in een beta-fase. Android Auto 6.9 of hoger is vereist.</string>
-    <string name="coolwalk_tweak">Coolwalk ontwerp</string>
     <string name="tutorial_focus_settings">Deze tweak zal een nieuwe optie activeren in Android Auto instellingen om handmatig aan te passen hoe Android Auto moet worden gestart zodra u uw telefoon met de auto verbindt. Android Auto 6.8 of superieur is vereist.</string>
     <string name="focus_tweak">Focus instellingen</string>
     <string name="assistant_tips">Assistant tips</string>
@@ -136,12 +132,8 @@ WAARSCHUWING: Deze tweak is niet uitgebreid getest en kan Android Auto mogelijk 
     <string name="warning_patch_apps">Waarschuwing! Deze bewerking zal ALLE DATA uit de geselecteerde app(s) verwijderen. Zorg ervoor dat u een back-up van de gegevens hebt. Wilt u toch doorgaan?</string>
     <string name="tappable_progress">Nieuwe voortgangsbalk</string>
     <string name="tappable_progress_tutorial">Eindelijk krijgen we een aanraakbare voortgangsbalk voor wat op Android Auto speelt. Ja, we kunnen door het huidige nummer zoeken. Android Auto 8.3 of hoger vereist.</string>
-    <string name="uxprototype_tutorial">Het enige dat deze tweak in feite doet is een snelkoppeling op de startpagina creëren om een webpagina te openen. Het omvat een verborgen Easter egg in Android Auto uitgebracht op 1 april 2022. Activeer \"Ontwikkelaarsmodus\" in \"Ontwikkelaarsinstellingen\" onder \"Toepassingsmodus\". Het is op dit moment de enige manier om een echt fullscreen app te hebben in Android Auto. WAARSCHUWING: Niet afsluitbaar, gebruik dit alleen als je van plan bent om dit in je auto te gebruiken. Er is ook geen terug knop.</string>
-    <string name="uxprototype_dialog">Voer een geldige URL in</string>
-    <string name="uxprototype_tweak">Aangepaste snelkoppeling</string>
     <string name="tutorial_new_seekbar">"Met deze tweak worden media files doorzoekbaar door middel van een zoekbalk."</string>
     <string name="tutorial_materialyou">"Deze tweak schakelt \"Material You\" stijl in voor de Android Auto instellingen op de telefoon. Dit werkt alleen op Android Auto 8.8&gt; zoals getest"</string>
-    <string name="tutorial_nocoolwalk">Are you absolutely hating Coolwalk? This tweak is for you.</string>
     <string name="portrait_layout">Force vertical layout</string>
     <string name="tutorial_portrait">This tweak will force the portrait layout of Android Auto with dashboard on the bottom.</string>
     <string name="inertial_scroll_tweak">Inertial scroll</string>

@@ -131,13 +131,9 @@ public class SplashActivity extends AppCompatActivity {
         editor.putBoolean("aa_inertial_scroll", false);
         editor.putBoolean("aa_bitrate_usb", false);
         editor.putBoolean("aa_bitrate_wireless", false);
-        editor.putBoolean("coolwalk_daynight_tweak", false);
-        editor.putBoolean("aa_activate_coolwalk", false);
-        editor.putBoolean("aa_deactivate_coolwalk", false);
         editor.putBoolean("aa_activate_declinesms", false);
         editor.putBoolean("aa_activate_assistant_tips", false);
         editor.putBoolean("aa_new_seekbar", false);
-        editor.putBoolean("uxprototype_tweak", false);
         editor.putBoolean("aa_material_you", false);
         editor.putBoolean("aa_vertical_bar", false);
         editor.commit();

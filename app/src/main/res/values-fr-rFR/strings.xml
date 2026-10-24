@@ -116,11 +116,7 @@ AVERTISSEMENT : Ce tweak n\'a pas été testé de manière approfondie et pourra
     <string name="remove_paired_car">Supprimer une voiture appairée</string>
     <string name="choose_cars">Sélectionner la ou les voitures</string>
     <string name="tutorial_carremover">Saviez-vous que sous Android Auto, il est uniquement possible de supprimer d\'un coup l\'intégralité des voitures appairées et non une à la fois ? Cette option sera très utile si vous voulez faire des suppressions spécifiques. Pour cela, il suffit de sélectionner la ou les voitures que vous voulez et elles seront supprimées.</string>
-    <string name="coolwalk_daynight_tweak">Mode Jour/Nuit Coolwalk</string>
-    <string name="coolwalk_daynight_tutorial">Ce tweak activera le mode jour/nuit pour le mode Coolwalk.</string>
     <string name="custom_hotseat_option">Option du siège conducteur</string>
-    <string name="tutorial_coolwalk">Ce tweak activera un nouveau design dans Android Auto (nom de code Coolwalk) qui peut être activé dans les paramètres d\'Android Auto et qui modifie un peu l\'apparence sur les écrans plus petits. Ce design comporte un panneau latéral toujours visible et des graphiques différents. Cette fonctionnalité n\'en est qu\'à ses débuts pour le moment. Android Auto 6.9 ou supérieur est requis.</string>
-    <string name="coolwalk_tweak">Affichage Coolwalk</string>
     <string name="tutorial_focus_settings">Ce tweak activera une nouvelle option dans les paramètres d\'Android Auto pour personnaliser manuellement si Android Auto doit être lancé dès que vous connectez votre téléphone avec la voiture. Android Auto 6.8 ou supérieur est requis.</string>
     <string name="focus_tweak">Paramètres de mise au point</string>
     <string name="assistant_tips">Astuces de l\'assistant</string>
@@ -136,12 +132,8 @@ AVERTISSEMENT : Ce tweak n\'a pas été testé de manière approfondie et pourra
     <string name="warning_patch_apps">Attention ! Cette opération EFFACERA TOUTES LES DONNÉES des applis sélectionnées. Veuillez vous assurer que vous avez une sauvegarde des données. Voulez-vous quand même procéder ?</string>
     <string name="tappable_progress">Nouvelle barre de progression</string>
     <string name="tappable_progress_tutorial">Enfin, nous bénéficions d\'une barre de progression tactile pour la lecture sur Android Auto. Oui, on peut naviguer dans la piste en cours. Nécessite Android Auto 8.3 ou supérieur.</string>
-    <string name="uxprototype_tutorial">Ce tweak permet de créer un raccourci sur la page d\'accueil pour ouvrir une page web. Il s\'agit d\'un œuf de Pâques caché dans Android Auto sorti le 1er avril 2022. Activez \"Développeur\" dans les \"Paramètres pour développeurs\" sous \"Mode de application\". C\'est le seul moyen d\'avoir une véritable application plein écran sur Android Auto pour le moment. AVERTISSEMENT : Impossible à fermer, utilisez ceci si vous ne prévoyez de l\'utiliser que sur votre voiture. Il n\'y a pas non plus de bouton retour.</string>
-    <string name="uxprototype_dialog">Entrez une URL valide</string>
-    <string name="uxprototype_tweak">Raccourci personnalisé</string>
     <string name="tutorial_new_seekbar">"Ce tweak permet d'activer une barre de progression déplaçable pour les applications multimédia."</string>
     <string name="tutorial_materialyou">"Ce tweak active le style \"Material You\" pour les paramètres d'Android Auto sur le téléphone. Cela ne fonctionne correctement que sur Android Auto 8.8 ou supérieur comme testé"</string>
-    <string name="tutorial_nocoolwalk">Vous détestez l\'interface Coolwalk ? Ce tweak est pour vous.</string>
     <string name="portrait_layout">Forcer la mise en page vertical</string>
     <string name="tutorial_portrait">Ce tweak forcera la mise en page portrait d\'Android Auto avec le tableau de bord en bas.</string>
     <string name="inertial_scroll_tweak">Défilement inertiel</string>

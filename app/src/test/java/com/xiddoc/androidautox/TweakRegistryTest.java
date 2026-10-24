@@ -98,16 +98,6 @@ public class TweakRegistryTest {
         for (FlagSpec s : l) assertEquals(FlagSpec.PKG_CAR, s.pkg);
     }
 
-    @Test
-    public void uxPrototypeSpecs_threadsUrlIntoFlag() {
-        List<FlagSpec> l = TweakRegistry.uxPrototypeSpecs("https://foo.bar/page");
-        assertEquals("UxPrototype__enabled", l.get(0).name);
-        assertEquals(PhixitSnapshot.TYPE_BOOL_TRUE, l.get(0).flag.type);
-        assertEquals("UxPrototype__url", l.get(1).name);
-        assertEquals(PhixitSnapshot.TYPE_STRING, l.get(1).flag.type);
-        assertEquals("https://foo.bar/page", l.get(1).flag.stringValue);
-    }
-
     // --- specsFor: every dynamic branch + default delegation ---------------
 
     @Test
@@ -152,27 +142,64 @@ public class TweakRegistryTest {
     }
 
     @Test
-    public void specsFor_uxPrototypeReadsSavedUrlPref() {
-        mainPrefs.edit().putString("uxprototype_url", "https://saved.example/x").apply();
-        List<FlagSpec> l = TweakRegistry.specsFor(ctx, "uxprototype_tweak");
-        assertEquals("UxPrototype__url", l.get(1).name);
-        assertEquals("https://saved.example/x", l.get(1).flag.stringValue);
-    }
-
-    @Test
-    public void specsFor_uxPrototypeDefaultsToEmptyUrl_whenUnset() {
-        List<FlagSpec> l = TweakRegistry.specsFor(ctx, "uxprototype_tweak");
-        assertEquals("UxPrototype__url", l.get(1).name);
-        assertEquals("", l.get(1).flag.stringValue);
-    }
-
-    @Test
     public void specsFor_defaultDelegatesToPhixitTweaks() {
         List<FlagSpec> l = TweakRegistry.specsFor(ctx, "aa_material_you");
         assertNotNull(l);
         assertEquals("SystemUi__material_you_settings_enabled", l.get(0).name);
         // an unknown key falls through to PhixitTweaks.specs -> null
         assertNull(TweakRegistry.specsFor(ctx, "nope_not_real"));
+    }
+
+    // --- specsFor(ctx, config, key): slider values come from the config -----
+
+    private static TweakConfig config(String... lines) {
+        StringBuilder sb = new StringBuilder("version=1\n");
+        for (String l : lines) sb.append(l).append('\n');
+        return TweakConfig.parse(sb.toString());
+    }
+
+    @Test
+    public void specsForConfig_nonSliderTweak_delegatesToSavedPrefsPath() {
+        TweakConfig cfg = config("tweak.aa_material_you=on");
+        List<FlagSpec> l = TweakRegistry.specsFor(ctx, cfg, "aa_material_you");
+        assertEquals("SystemUi__material_you_settings_enabled", l.get(0).name);
+        // A key the config does not carry also falls back to the saved-prefs path.
+        assertEquals("BatterySaver__warning_enabled",
+                TweakRegistry.specsFor(ctx, cfg, "battery_saver_warning").get(0).name);
+        assertNull(TweakRegistry.specsFor(ctx, cfg, "nope_not_real"));
+    }
+
+    @Test
+    public void specsForConfig_messagingHun_usesConfigValueNotSavedValue() {
+        mainPrefs.edit().putInt("messaging_hun_value", 1111).apply();
+        TweakConfig cfg = config("tweak.aa_hun_ms=on", "value.messaging_hun_value=8000");
+        List<FlagSpec> l = TweakRegistry.specsFor(ctx, cfg, "aa_hun_ms");
+        assertEquals("SystemUi__hun_default_heads_up_timeout_ms", l.get(0).name);
+        assertEquals(8000L, l.get(0).flag.longValue);
+    }
+
+    @Test
+    public void specsForConfig_mediaHun_usesConfigValue() {
+        TweakConfig cfg = config("tweak.aa_media_hun=on", "value.media_hun_value=45000");
+        List<FlagSpec> l = TweakRegistry.specsFor(ctx, cfg, "aa_media_hun");
+        assertEquals("SystemUi__media_hun_in_rail_widget_timeout_ms", l.get(0).name);
+        assertEquals(45000L, l.get(0).flag.longValue);
+    }
+
+    @Test
+    public void specsForConfig_usbBitrate_scalesByConfigValue() {
+        TweakConfig cfg = config("tweak.aa_bitrate_usb=on", "value.usb_bitrate_value=2.5");
+        List<FlagSpec> l = TweakRegistry.specsFor(ctx, cfg, "aa_bitrate_usb");
+        assertEquals(6, l.size());
+        assertEquals(16000000 * 2.5, dbl(l.get(0)), 0.001);
+    }
+
+    @Test
+    public void specsForConfig_wifiBitrate_scalesByConfigValue() {
+        TweakConfig cfg = config("tweak.aa_bitrate_wireless=on", "value.wifi_bitrate_value=0.5");
+        List<FlagSpec> l = TweakRegistry.specsFor(ctx, cfg, "aa_bitrate_wireless");
+        assertEquals(6, l.size());
+        assertEquals(16000000 * 0.5, dbl(l.get(0)), 0.001);
     }
 
     // --- patchedAppsSpecs --------------------------------------------------

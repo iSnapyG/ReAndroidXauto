@@ -117,11 +117,7 @@
     <string name="remove_paired_car">Удалить подключенный автомобиль</string>
     <string name="choose_cars">Выбрать автомобиль(и)</string>
     <string name="tutorial_carremover">Знаете ли вы, что можно удалить только все подключенные автомобили из Android Auto, а удалить только один из них невозможно? Эта опция поможет вам удалить один автомобиль из Android Auto,  а не все сразу.</string>
-    <string name="coolwalk_daynight_tweak">Светлый/Темный Coolwalk</string>
-    <string name="coolwalk_daynight_tutorial">Эта настройка активирует дневной/ночной режим для режима Coolwalk. Выглядит сломанной на данный момент и может некорректно переключать.</string>
     <string name="custom_hotseat_option">Пользовательские параметры загрузки</string>
-    <string name="tutorial_coolwalk">Этот твик активирует новый интерфейс  Android Auto (Codewalk), который можно включить в настройках Android Auto. При этом будет  незначительно изменён внешний вид и  добавятся дополнительные окна. Этот интерфейс  всегда отображает боковую панель и графику. Параметр в данный момент находится на ранней стадии тестирования. Требуется Android Auto 6.9 или новее.</string>
-    <string name="coolwalk_tweak">Интерфейс Coolwalk </string>
     <string name="tutorial_focus_settings">Этот параметр активирует новую возможность ручной настройки для автоматического запуска Android Auto при подключении телефона к автомобилю. Требуется Android Auto 6.8 или новее.</string>
     <string name="focus_tweak">Настройки фокуса</string>
     <string name="assistant_tips">Советы ассистента</string>
@@ -137,12 +133,8 @@
     <string name="warning_patch_apps">Внимание! Эта операция ОЧИСТИТ ВСЕ ДАННЫЕ из выбранных приложений. Пожалуйста, убедитесь, что у вас есть резервная копия данных. Вы все равно хотите продолжить?</string>
     <string name="tappable_progress">Новый индикатор прогресса</string>
     <string name="tappable_progress_tutorial">Наконец-то нам доступен сенсорный прогресс бар воспроизводимого контента на Android Auto. Да, мы можем перематывать текущий трек. Требуется Android Auto 8.3 или выше.</string>
-    <string name="uxprototype_tutorial">Все что делает этот твик, создает ярлык на главной странице, чтобы открыть веб-страницу. Это пасхалка, скрытая в Android Auto от 1 апреля 2022 года. Активируйте версию приложения \"Для разработчиков\" в настройках \"Для разработчиков\". Это единственный способ создать полноэкранное приложение на Android Auto прямо сейчас. ПРЕДУПРЕЖДЕНИЕ: Не выйти, используйте это, только если вы планируете использовать в своем автомобиле. Кнопка возврата также отсутствует.</string>
-    <string name="uxprototype_dialog">Введите корректный URL</string>
-    <string name="uxprototype_tweak">Пользовательский ярлык</string>
     <string name="tutorial_new_seekbar">"Эта настройка включает панель поиска для медиа приложений."</string>
     <string name="tutorial_materialyou">"Эта настройка включает Material you стиль для приложения Android Auto на телефоне. Тесты показали, что корректно работает только в Android Auto 8.8&gt;"</string>
-    <string name="tutorial_nocoolwalk">Вам не нравится Coolwalk? Значит эта настройка для вас.</string>
     <string name="portrait_layout">Force vertical layout</string>
     <string name="tutorial_portrait">Эта настройка принудительно выставит портретный режим Android Auto с панелью задач внизу.</string>
     <string name="inertial_scroll_tweak">Инерционная прокрутка</string>

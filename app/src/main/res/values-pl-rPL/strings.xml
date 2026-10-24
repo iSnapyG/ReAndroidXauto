@@ -118,11 +118,7 @@ OSTRZEŻENIE: ta modyfikacja nie została dokładnie przetestowana i może poten
     <string name="remove_paired_car">Usuń sparowany samochód</string>
     <string name="choose_cars">Wybierz samochód (y) </string>
     <string name="tutorial_carremover">Czy wiesz, że możesz usunąć wszystkie sparowane samochody z Android Auto na raz i nie musisz usunąć ich pojedynczo? Jeśli chcesz usunąć samochód z Android Auto, po prostu wybierz, który samochód (y) chcesz usunąć, a on / one zostaną usunięte. </string>
-    <string name="coolwalk_daynight_tweak">Jasny/Ciemny tryb Coolwalk</string>
-    <string name="coolwalk_daynight_tutorial">Ta funkcja aktywuje tryb dzienny/nocny w trybie Coolwalk. Na ten moment nie działa w pełni - nie jest w stanie dobrze obsłużyć przełączania.</string>
     <string name="custom_hotseat_option">Wybór pozycji kierowcy (lewo/prawo stronna)</string>
-    <string name="tutorial_coolwalk">Ta poprawka aktywuje nowy projekt w Android Auto (nazwa kodowa Coolwalk), który można przełączać w ustawieniach Android Auto i który nieco poprawia wygląd na mniejszych ekranach. Ten projekt ma zawsze widoczny panel boczny i różne grafiki. Ta funkcja jest obecnie na wczesnym etapie. Wymagany Android Auto 6.9 lub nowszy </string>
-    <string name="coolwalk_tweak">Podział ekranu (Coolwalk design)</string>
     <string name="tutorial_focus_settings">Ta poprawka aktywuje nowe opcje w ustawieniach Android Auto, aby ręcznie dostosować, czy Android Auto ma być uruchamiany zaraz po podłączeniu telefonu do samochodu. Wymagany Android Auto 6.8 lub nowszy.</string>
     <string name="focus_tweak">Ustawienia ostrości </string>
     <string name="assistant_tips">Porady asystenta</string>
@@ -138,12 +134,8 @@ OSTRZEŻENIE: ta modyfikacja nie została dokładnie przetestowana i może poten
     <string name="warning_patch_apps">Uwaga! Ta operacja usunie WSZYSTKIE DANE z zaznaczonych aplikacji. Upewnij się, że masz kopię zapasową danych. Czy mimo to chcesz kontynuować?</string>
     <string name="tappable_progress">Nowy pasek postępu</string>
     <string name="tappable_progress_tutorial">Wreszcie otrzymujemy pasek postępu dla tego, co gra na Android Auto. Tak, możemy przeskakiwać do wybranej części utworu. Wymagany jest Android Auto 8.3 lub wyższy.</string>
-    <string name="uxprototype_tutorial">Tworzy skrót na stronie głównej, aby otworzyć stronę internetową. Wykorzystuje Easter Egg ukryte w Android Auto wydanym dnia 1 kwietnia 2022 r. Włącz \"Tryb programisty\" w \"Ustawienia programisty\" w \"trybie aplikacji\". To jedyny sposób na posiadanie aplikacji pełnoekranowej w Android Auto. OSTRZEŻENIE: Nie można tego zamknąć, użyj tego, jeśli planujesz używać tego tylko w samochodzie. Nie ma też przycisku wstecz.</string>
-    <string name="uxprototype_dialog">Wprowadź prawidłowy adres URL</string>
-    <string name="uxprototype_tweak">Własne skróty</string>
     <string name="tutorial_new_seekbar">"Ta funkcja włącza pasek wyszukiwania dla aplikacji medialnych."</string>
     <string name="tutorial_materialyou">"Ta funkcja umożliwia korzystanie ze stylu Material you dla ustawień Android Auto na telefonie. Poprawnie działa tylko na Androidzie Auto 8.8&gt; -- na podstawie testów do tej pory"</string>
-    <string name="tutorial_nocoolwalk">Bezwzględnie nienawidzisz Coolwalka? Ta funkcja jest dla ciebie.</string>
     <string name="portrait_layout">Force vertical layout</string>
     <string name="tutorial_portrait">Ta funkcja wymusi układ pionowy Androida Auto z pulpitem nawigacyjnym na dole.</string>
     <string name="inertial_scroll_tweak">Przewijanie ciągłe.</string>

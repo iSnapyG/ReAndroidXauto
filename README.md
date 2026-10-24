@@ -18,9 +18,11 @@ The ultimate All-In-One utility to tweak Android Auto behaviour.
 - Force (or force-disable) widescreen
 - Force portrait mode
 - Enable MultiDisplay / cluster-sim support
-- Force-enable the Coolwalk UI
 - Tune notification & media notification duration
 - Set video bitrate, and disable unnecessary telemetry
+- Compatibility check: see which tweaks reference flags your installed Android Auto no longer mentions
+- Tweak presets: save the tweaks you have on under a name and switch back in one step
+- Export / import your tweaks as a text file
 
 …and much more 🎛️
 

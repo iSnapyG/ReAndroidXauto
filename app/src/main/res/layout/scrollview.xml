@@ -311,33 +311,13 @@
             app:layout_constraintTop_toTopOf="@id/multi_display_button"
             app:layout_constraintBottom_toBottomOf="@id/multi_display_button"/>
 
-                <Button
-                    android:id="@+id/nocoolwalk_tweak_button"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    style="@style/ButtonStyle"
-                    android:focusable="true"
-                    app:layout_constraintEnd_toStartOf="@id/nocoolwalk_tweak_status"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/multi_display_button" />
 
-                <ImageView
-                    android:id="@+id/nocoolwalk_tweak_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:src="@drawable/ic_baseline_check_circle_24"
-                    android:layout_marginEnd="3dp"
-                    app:layout_constraintStart_toEndOf="@id/nocoolwalk_tweak_button"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/nocoolwalk_tweak_button"
-                    app:layout_constraintBottom_toBottomOf="@id/nocoolwalk_tweak_button"/>
 
                 <TextView
                     android:id="@+id/section_three"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/nocoolwalk_tweak_status"
+                    app:layout_constraintTop_toBottomOf="@id/multi_display_button"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginTop="24dp"
@@ -823,29 +803,8 @@
                     app:layout_constraintTop_toTopOf="@id/message_autoread_tweak_button"
                     app:layout_constraintBottom_toBottomOf="@id/message_autoread_tweak_button"/>
 
-                <Button
-                    android:id="@+id/coolwalk_tweak_button"
-                    android:paddingTop="9dp"
-                    android:layout_width="0dp"
-                    style="@style/ButtonStyle"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:drawablePadding="9dp"
-                    app:layout_constraintEnd_toStartOf="@id/message_autoread_tweak_status"
-                    app:layout_constraintTop_toBottomOf="@id/message_autoread_tweak_button"
-                    app:layout_constraintStart_toStartOf="parent" />
 
 
-                <ImageView
-                    android:id="@+id/coolwalk_tweak_status"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_check_circle_24"
-                    android:layout_marginEnd="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/coolwalk_tweak_button"
-                    app:layout_constraintBottom_toBottomOf="@id/coolwalk_tweak_button" />
 
                 <Button
                     android:id="@+id/assistanttips_tweak_button"
@@ -857,7 +816,7 @@
                     android:focusable="true"
                     android:drawablePadding="9dp"
                     app:layout_constraintEnd_toStartOf="@id/message_autoread_tweak_status"
-                    app:layout_constraintTop_toBottomOf="@id/coolwalk_tweak_button"
+                    app:layout_constraintTop_toBottomOf="@id/message_autoread_tweak_button"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <ImageView
@@ -893,51 +852,9 @@
                     app:layout_constraintTop_toTopOf="@id/declinesms_tweak_button"
                     app:layout_constraintBottom_toBottomOf="@id/declinesms_tweak_button" />
 
-                <Button
-                    android:id="@+id/coolwalkdaynighttweak"
-                    android:paddingTop="9dp"
-                    android:layout_width="0dp"
-                    style="@style/ButtonStyle"
-                    android:layout_height="wrap_content"
-                    android:clickable="true"
-                    android:focusable="true"
-                    android:drawablePadding="9dp"
-                    app:layout_constraintEnd_toStartOf="@id/message_autoread_tweak_status"
-                    app:layout_constraintTop_toBottomOf="@id/declinesms_tweak_button"
-                    app:layout_constraintStart_toStartOf="parent" />
 
-                <ImageView
-                    android:id="@+id/coolwalkdaynightstatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_baseline_check_circle_24"
-                    android:layout_marginEnd="3dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/coolwalkdaynighttweak"
-                    app:layout_constraintBottom_toBottomOf="@id/coolwalkdaynighttweak" />
 
-                               <Button
-                                  android:id="@+id/uxprototypetweak"
-                                  android:paddingTop="9dp"
-                                  android:layout_width="0dp"
-                                  style="@style/ButtonStyle"
-                                  android:layout_height="wrap_content"
-                                  android:clickable="true"
-                                  android:focusable="true"
-                                  android:drawablePadding="9dp"
-                                  app:layout_constraintEnd_toStartOf="@id/message_autoread_tweak_status"
-                                  app:layout_constraintTop_toBottomOf="@id/coolwalkdaynighttweak"
-                                  app:layout_constraintStart_toStartOf="parent" />
 
-                            <ImageView
-                                  android:id="@+id/uxptototypestatus"
-                                  android:layout_width="wrap_content"
-                                  android:layout_height="wrap_content"
-                                  android:src="@drawable/ic_baseline_check_circle_24"
-                                  android:layout_marginEnd="3dp"
-                                  app:layout_constraintEnd_toEndOf="parent"
-                                  app:layout_constraintTop_toTopOf="@id/uxprototypetweak"
-                                  app:layout_constraintBottom_toBottomOf="@id/uxprototypetweak" />
 
                 <Button
                     android:id="@+id/materialyoutweak"
@@ -949,7 +866,7 @@
                     android:focusable="true"
                     android:drawablePadding="9dp"
                     app:layout_constraintEnd_toStartOf="@id/message_autoread_tweak_status"
-                    app:layout_constraintTop_toBottomOf="@id/uxprototypetweak"
+                    app:layout_constraintTop_toBottomOf="@id/declinesms_tweak_button"
                     app:layout_constraintStart_toStartOf="parent" />
 
                 <ImageView

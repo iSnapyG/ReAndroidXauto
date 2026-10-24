@@ -13,28 +13,8 @@ public final class PhixitTweaks {
 
     private PhixitTweaks() {}
 
-    /**
-     * Placeholder value used for {@code UxPrototype__url} when no real URL is supplied
-     * (the no-arg {@link #specs(String)} path, used by revert which keys on pkg+name and
-     * ignores the value). The real user-entered URL is threaded in via the dynamic-value
-     * path ({@link TweakRegistry#uxPrototypeSpecs(String)} / {@link #specs(String, String)}).
-     */
-    static final String UX_URL_PLACEHOLDER = "";
-
     /** Returns the flag specs for a tweak key, or null if not a registry tweak. */
     public static List<FlagSpec> specs(String key) {
-        return specs(key, UX_URL_PLACEHOLDER);
-    }
-
-    /**
-     * As {@link #specs(String)} but threads {@code uxUrl} into the {@code uxprototype_tweak}
-     * {@code UxPrototype__url} string flag. Other tweaks ignore {@code uxUrl}.
-     *
-     * <p>A {@code null} {@code uxUrl} is normalized to {@link #UX_URL_PLACEHOLDER} so a null
-     * can never reach {@code PhixitEngine}'s {@code stringValue.getBytes(...)} and NPE.
-     */
-    public static List<FlagSpec> specs(String key, String uxUrl) {
-        uxUrl = uxUrl == null ? UX_URL_PLACEHOLDER : uxUrl;
         List<FlagSpec> l = new ArrayList<FlagSpec>();
         switch (key) {
             case "aa_message_autoread":
@@ -91,95 +71,8 @@ public final class PhixitTweaks {
                 l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "CarAppLibrary__app_driven_refresh_enabled", false));
                 l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "CarAppLibrary__app_driven_refresh_enabled_for_undefined_category", false));
                 break;
-            case "coolwalk_daynight_tweak":
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__day_night_theme_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__enable_palette_swap_by_broadcast", true));
-                break;
             case "aa_battery_outline":
                 l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "BatterySaver__icon_outline_enabled", false));
-                break;
-            case "aa_activate_coolwalk":
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Assistant__coolwalk_suggestions_grpc_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__media_rec_card_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__opt_in _default", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__rail_dock_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__rail_dock_four_app_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__rail_widget_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__allow_focus_input", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__assistant_media_rec_shortcut_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__assistant_suggestions_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__canonical_vertical_rail_default", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__choose_assistant_suggestion_over_app_suggestion", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Media__coolwalk_playback_gradient_scrim_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Media__favorites_button_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__streamed_media_recommendations_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Media__foreground_search_fab_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__a4c_suggestions_kill_switch", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__rotary_proximity_navigation", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__semi_wide_vertical_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__short_canonical_vertical_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__three_actions_hun_ui_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__indicate_severe_thermal_status", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__focus_check_kill_switch", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__fix_status_bar_highlight_ghosting_kill_switch", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__use_widescreen_crossfade", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__dashboard_placement_customization_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__media_notification_high_priority_kill_switch", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__launcher_settings_kill_switch", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Weather__enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Weather__icon_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Weather__preinstalled_frx_toggle_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Boardwalk__news_browser_available", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "SystemUi__car_ui_entry_use_configuration_context_kill_switch", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "SystemUi__media_switcher_page_while_started_kill_switch", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "SystemUi__projection_notification_hun_sbn_converter_hack_kill_switch", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "SystemUi__rail_assistant_media_rec_enabled_on_focus_screens", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "SystemUi__wallpaper_backdrop_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "AppListUi__use_updated_calendar_ui", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "CarAppLibrary__is_toggle_allowed_in_map_and_pane_templates_kill_switch", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "CarAppLibrary__messaging_aap_host_logic_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "CarAppLibrary__tab_template_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "CompanionDeviceManager__integration_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__allow_all_inputs_kill_switch", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Media__show_album_art_for_suggestion", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Media__show_settings_button_in_browse_view", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "CarAppLibrary__radio_buttons_ui_changes_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__improve_startup", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Media__custom_action_assert_connection_kill_switch", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__rail_widget_user_education_enabled", true));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__navigation_signal_to_assistant_enabled", true));
-                break;
-            case "aa_deactivate_coolwalk":
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__enabled", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Assistant__coolwalk_suggestions_grpc_enabled", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__fishfood_nag_enabled", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__media_rec_card_enabled", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__opt_in _default", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__rail_dock_enabled", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__rail_dock_four_app_enabled", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__rail_widget_enabled", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__allow_focus_input", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__assistant_media_rec_shortcut_enabled", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__assistant_suggestions_enabled", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__canonical_vertical_rail_default", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__canonical_vertical_rail_enabled", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__choose_assistant_suggestion_over_app_suggestion", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Media__coolwalk_playback_gradient_scrim_enabled", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Media__favorites_button_enabled", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__streamed_media_recommendations_enabled", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__a4c_suggestions_kill_switch", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__rotary_proximity_navigation", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__semi_wide_vertical_enabled", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__short_canonical_vertical_enabled", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__three_actions_hun_ui_enabled", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__indicate_severe_thermal_status", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__use_widescreen_crossfade", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__dashboard_placement_customization_enabled", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__media_notification_high_priority_kill_switch", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__add_boardwalk_theme_attrs_kill_switch", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__choreograph_start_composition_kill_switch", false));
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "Coolwalk__rail_hotseat_check_app_available_kill_switch", false));
                 break;
             case "aa_material_you":
                 l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "SystemUi__material_you_settings_enabled", true));
@@ -243,10 +136,6 @@ public final class PhixitTweaks {
                 l.add(FlagSpec.bool(FlagSpec.PKG_CAR, "CarProjectionValidator__measure_latency_enabled", false));
                 l.add(FlagSpec.bool(FlagSpec.PKG_CAR, "PhenotypeProcessStableFlags__first_read_latency", false));
                 l.add(FlagSpec.bool(FlagSpec.PKG_CAR, "PhenotypeProcessStableFlags__legacy_flag_infrastructure_enabled", true));
-                break;
-            case "uxprototype_tweak":
-                l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "UxPrototype__enabled", true));
-                l.add(FlagSpec.str(FlagSpec.PKG_GEARHEAD, "UxPrototype__url", uxUrl));
                 break;
             case "aa_inertial_scroll":
                 l.add(FlagSpec.bool(FlagSpec.PKG_GEARHEAD, "SystemUi__inertial_scrolling_enabled", true));

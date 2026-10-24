@@ -20,6 +20,10 @@ import java.util.List;
 public enum SettingAction {
     RESET_TWEAKS(false),
     AUTO_REAPPLY(false),
+    COMPAT_CHECK(false),
+    PRESETS(false),
+    EXPORT_CONFIG(false),
+    IMPORT_CONFIG(false),
     AA_SETTINGS(false),
     AUTO_BACKUP_DBS(false),
     PHIXIT_APPLY_TEST(true),   // developer-only

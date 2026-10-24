@@ -14,6 +14,9 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
     <!-- Car App: required to use navigation templates in the Android Auto host -->
     <uses-permission android:name="androidx.car.app.NAVIGATION_TEMPLATES"/>
+    <!-- The AutoX Store car app is declared as a POI-category car app, which the Android
+         Auto host expects to hold the map-templates permission. -->
+    <uses-permission android:name="androidx.car.app.MAP_TEMPLATES"/>
 
     <application
         android:name=".AaxApp"
@@ -115,6 +118,19 @@
             <intent-filter>
                 <action android:name="androidx.car.app.CarAppService"/>
                 <category android:name="androidx.car.app.category.NAVIGATION"/>
+            </intent-filter>
+        </service>
+
+        <!-- AutoX Store car app: a second Android Auto launcher entry for browsing, installing,
+             updating and removing apps. POI category so it does not compete with AutoX in the
+             navigation-app picker. exported=true so the host can bind to it. -->
+        <service
+            android:name=".store.car.StoreCarAppService"
+            android:label="@string/store_title"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="androidx.car.app.CarAppService"/>
+                <category android:name="androidx.car.app.category.POI"/>
             </intent-filter>
         </service>
 

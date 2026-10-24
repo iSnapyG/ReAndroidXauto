@@ -35,6 +35,7 @@ public class SettingActionTest {
                 SettingAction.PRESETS,
                 SettingAction.EXPORT_CONFIG,
                 SettingAction.IMPORT_CONFIG,
+                SettingAction.STORE_SETTINGS,
                 SettingAction.AA_SETTINGS,
                 SettingAction.AUTO_BACKUP_DBS,
                 SettingAction.PHIXIT_APPLY_TEST,
@@ -62,6 +63,7 @@ public class SettingActionTest {
                 SettingAction.PRESETS,
                 SettingAction.EXPORT_CONFIG,
                 SettingAction.IMPORT_CONFIG,
+                SettingAction.STORE_SETTINGS,
                 SettingAction.AA_SETTINGS,
                 SettingAction.AUTO_BACKUP_DBS,
                 SettingAction.DEV_MODE_TOGGLE);

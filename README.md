@@ -23,6 +23,7 @@ The ultimate All-In-One utility to tweak Android Auto behaviour.
 - Compatibility check: see which tweaks reference flags your installed Android Auto no longer mentions
 - Tweak presets: save the tweaks you have on under a name and switch back in one step
 - Export / import your tweaks as a text file
+- **AutoX Store**: a second Android Auto launcher entry that lists apps made for Android Auto (and phone apps you can run through AutoX), with search, categories, silent root install, updates and uninstall. Catalog: a built-in list plus the F-Droid index (opt-in) and an optional catalog URL of your own. See [docs/app-store.md](docs/app-store.md).
 
 …and much more 🎛️
 

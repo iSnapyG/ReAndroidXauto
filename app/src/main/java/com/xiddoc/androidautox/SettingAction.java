@@ -24,6 +24,7 @@ public enum SettingAction {
     PRESETS(false),
     EXPORT_CONFIG(false),
     IMPORT_CONFIG(false),
+    STORE_SETTINGS(false),
     AA_SETTINGS(false),
     AUTO_BACKUP_DBS(false),
     PHIXIT_APPLY_TEST(true),   // developer-only

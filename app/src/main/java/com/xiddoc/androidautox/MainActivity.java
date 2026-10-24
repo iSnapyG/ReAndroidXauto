@@ -58,6 +58,7 @@ import java.util.regex.Pattern;
 
 import com.xiddoc.androidautox.CarRemoverActivity.CarRemover;
 import com.xiddoc.androidautox.Utils.BottomDialog;
+import com.xiddoc.androidautox.store.android.StoreSettingsDialog;
 import com.xiddoc.androidautox.autox.AutoXEnablementPolicy;
 import com.xiddoc.androidautox.autox.AutoXSettingsStore;
 
@@ -1796,6 +1797,12 @@ public class MainActivity extends AppCompatActivity {
                     b.setOnClickListener(v -> importConfigLauncher.launch(
                             new String[]{"text/plain", "application/octet-stream"}));
                     setOnLongClickListener(b, R.string.settings_import_desc);
+                    break;
+                }
+                case STORE_SETTINGS: {
+                    Button b = findViewById(R.id.settings_store);
+                    b.setOnClickListener(v -> StoreSettingsDialog.show(this));
+                    setOnLongClickListener(b, R.string.settings_store_desc);
                     break;
                 }
                 case AA_SETTINGS: {

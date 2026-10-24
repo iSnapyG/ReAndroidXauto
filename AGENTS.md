@@ -56,8 +56,25 @@ AndroidAutoX is a native Android app that applies "tweaks" to Google's Android A
 | `app/src/main/res/values/strings.xml` | English source strings (localization source of truth) |
 | `app/src/main/res/values-*/strings.xml` | ~33 translated locales (edited via PRs) |
 | `app/src/main/java/com/xiddoc/androidautox/autox/` | AutoX virtual-display subsystem (pure-logic + framework glue) |
+| `app/src/main/java/com/xiddoc/androidautox/store/` | AutoX Store (app marketplace) pure logic; `store/android` + `store/car` are framework glue |
+| `app/src/main/assets/store/seed-catalog.json` | Catalog bundled with the app (F-Droid references pinned to signing keys) |
+| `docs/app-store.md` | AutoX Store: architecture, security model, catalog format, limits |
 | `app/src/main/res/xml/automotive_app_desc.xml` | Car app descriptor (`<automotiveApp><uses name="template"/>`) |
 | `docs/autox-architecture.md` | AutoX subsystem architecture: pipeline, class split, input-injection caveat |
+
+## AutoX Store (app marketplace)
+
+The `store/` sub-package is an Android Auto car app (`StoreCarAppService`, POI category) plus
+a phone-side settings dialog (`StoreSettingsDialog`, opened from the "App store" settings
+button). It lists apps from three sources (bundled seed catalog, an optional user catalog
+URL, the F-Droid index), downloads APKs over https, verifies them, and installs silently
+through the libsu root shell (`pm install`). Everything except `store/android/*` and
+`store/car/*` is plain Java with no Android imports (except `StoreSettings` and
+`PrefsInstallRecords`, which only use `SharedPreferences`) and is covered at 100% by
+plain-JUnit tests in `app/src/test/.../store/`; the two glue packages are excluded from the
+JaCoCo gate. Read `docs/app-store.md` before changing install or verification behaviour:
+the rules there (https only, mandatory signer pin, package-name validation before any shell
+use, uninstall only for apps the store installed) are security properties.
 
 ## AutoX virtual-display subsystem
 

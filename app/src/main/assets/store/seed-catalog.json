@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "apps": [
+    {
+      "name": "AntennaPod",
+      "package": "de.danoeh.antennapod",
+      "kind": "car",
+      "signer": [
+        "179430565a4a04bfe7827483243099bd10870410800cd7c4c7b48d8d3226df55"
+      ],
+      "fdroid": true
+    },
+    {
+      "name": "VLC",
+      "package": "org.videolan.vlc",
+      "kind": "car",
+      "signer": [
+        "80535be61eedb9a03b0476a6f493d496c3498770404339ea7a8000f5e61d22c0"
+      ],
+      "fdroid": true
+    },
+    {
+      "name": "Auxio",
+      "package": "org.oxycblt.auxio",
+      "kind": "car",
+      "signer": [
+        "65b3e62a2b57bf73235be6d2d42ae546fcb02fd17f62cd14500d1c412a285972"
+      ],
+      "fdroid": true
+    },
+    {
+      "name": "Phonograph Plus",
+      "package": "player.phonograph.plus",
+      "kind": "car",
+      "signer": [
+        "01654eb9348b2c802fcbf21282de0cdca2a226337b9a2fa201e3ac376b0ce76c"
+      ],
+      "fdroid": true
+    },
+    {
+      "name": "Retro Music",
+      "package": "code.name.monkey.retromusic",
+      "kind": "car",
+      "signer": [
+        "a4bd9da9516b3c9f49b52419c6e3d21da3754d67f488269c3b05bf75df731ccf"
+      ],
+      "fdroid": true
+    },
+    {
+      "name": "Voice Audiobook Player",
+      "package": "de.ph1b.audiobook",
+      "kind": "car",
+      "signer": [
+        "2e69583ae90f795f33c10594cd83922e7324b5da9047769d5338b8dff383b897"
+      ],
+      "fdroid": true
+    },
+    {
+      "name": "Open Open Radio",
+      "package": "com.charlyghislain.openopenradio",
+      "kind": "car",
+      "signer": [
+        "5e137169c130744d3e9643d2b71367b1f94f14cc56933d592eb27d46c6c94a5e"
+      ],
+      "fdroid": true
+    },
+    {
+      "name": "Organic Maps",
+      "package": "app.organicmaps",
+      "kind": "car",
+      "signer": [
+        "e216fc386c327ec88d056026f1dea27be2bc3f9d7ee956e4361c4b64ec459fe9"
+      ],
+      "fdroid": true
+    },
+    {
+      "name": "NewPipe",
+      "package": "org.schabi.newpipe",
+      "kind": "autox",
+      "signer": [
+        "964dfa418e66390110b0c061a0497cbbd7395b8b2526bee4dece95597eb5e9d4",
+        "cb84069bd68116bafae5ee4ee5b08a567aa6d898404e7cb12f9e756df5cf5cab"
+      ],
+      "fdroid": true
+    },
+    {
+      "name": "Jellyfin",
+      "package": "org.jellyfin.mobile",
+      "kind": "autox",
+      "signer": [
+        "d881796ed2a67ff6ef9f676828723c6b1fa18e09388962cba4abc4a594a69131"
+      ],
+      "fdroid": true
+    }
+  ]
+}

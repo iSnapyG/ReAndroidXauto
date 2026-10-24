@@ -223,6 +223,10 @@ dependencies {
     // Jetpack Car App library: CarAppService, Session, Screen, SurfaceCallback,
     // NavigationTemplate — used by the AutoX virtual-display projection layer.
     implementation 'androidx.car.app:app:1.4.0'
+    // JSON for the app store's catalog / F-Droid index / GitHub release parsing. Only the
+    // streaming JsonReader/JsonWriter are used (no reflection), so it needs no R8 keep rules,
+    // and unlike android.util.JsonReader it also runs in the plain-JVM unit tests.
+    implementation 'com.google.code.gson:gson:2.10.1'
 
     // WS4 LSPosed module API. compileOnly: the de.robv.android.xposed.* classes are
     // supplied at runtime by the LSPosed framework inside system_server and must never
@@ -302,6 +306,14 @@ def jacocoExclusions = [
         '**/VirtualDisplayController*.*', // DisplayManager.createVirtualDisplay wrapper
         '**/AppLauncher*.*',         // ActivityOptions.setLaunchDisplayId wrapper
         '**/GestureInjector.*',      // injection interface (no executable lines, excluded for safety)
+
+        // --- App store (Android Auto marketplace) framework glue ---
+        // store/android: PackageManager / libsu / SharedPreferences adapters behind the pure
+        // store interfaces. store/car: Car App Library service, session and screens.
+        // Everything else under store/ (catalog, F-Droid + GitHub parsing, verification,
+        // install orchestration) is pure logic and stays at 100%.
+        '**/store/android/*.*',
+        '**/store/car/*.*',
 
         // --- WS4 privileged-provider seam ---
         // Pure-logic provider classes are NOT excluded and must stay at 100%:

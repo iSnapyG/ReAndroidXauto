@@ -154,19 +154,30 @@ public final class StoreCatalogParser {
         throw new IllegalArgumentException("unknown kind");
     }
 
-    /**
-     * Writes apps with fixed-URL sources in this format (used for the on-device copy of the
-     * F-Droid index). Other source types cannot be represented and are rejected.
-     */
+    private static void writeSource(JsonWriter w, ApkSource source) throws IOException {
+        switch (source.type) {
+            case DIRECT:
+                w.name("size").value(source.size);
+                w.name("url").value(source.url);
+                w.name("sha256").value(source.sha256);
+                break;
+            case GITHUB:
+                w.name("github").value(source.repo);
+                w.name("asset").value(source.assetPattern);
+                break;
+            default:
+                w.name("fdroid").value(true);
+                break;
+        }
+    }
+
+    /** Writes apps in this format (the on-device copy of the F-Droid index, and the user's own apps). */
     public static void write(List<StoreApp> apps, Writer out) throws IOException {
         JsonWriter w = new JsonWriter(out);
         w.beginObject();
         w.name("version").value(FORMAT_VERSION);
         w.name("apps").beginArray();
         for (StoreApp app : apps) {
-            if (app.source.type != ApkSource.Type.DIRECT) {
-                throw new IllegalArgumentException("only fixed-URL apps can be written");
-            }
             w.beginObject();
             w.name("name").value(app.name);
             w.name("summary").value(app.summary);
@@ -180,9 +191,7 @@ public final class StoreCatalogParser {
             w.endArray();
             w.name("versionName").value(app.versionName);
             w.name("versionCode").value(app.versionCode);
-            w.name("size").value(app.source.size);
-            w.name("url").value(app.source.url);
-            w.name("sha256").value(app.source.sha256);
+            writeSource(w, app.source);
             w.endObject();
         }
         w.endArray();

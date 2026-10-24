@@ -31,7 +31,7 @@ public final class StoreSettingsDialog {
     public static void show(final Activity activity) {
         final StoreController controller = StoreEnvironment.controller(activity);
         final StoreSettings settings = StoreEnvironment.settings(activity);
-        controller.reload();
+        controller.reloadInBackground();
 
         final int pad = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 20,
                 activity.getResources().getDisplayMetrics());
@@ -118,8 +118,7 @@ public final class StoreSettingsDialog {
                             return;
                         }
                         settings.setFdroidEnabled(fdroid.isChecked());
-                        controller.reload();
-                        controller.refresh(false);
+                        controller.refresh(false); // reloads the list when it is done
                     }
                 });
                 dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setOnClickListener(new View.OnClickListener() {

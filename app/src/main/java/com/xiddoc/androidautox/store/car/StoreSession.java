@@ -16,7 +16,7 @@ final class StoreSession extends Session {
     @Override
     public Screen onCreateScreen(@NonNull Intent intent) {
         StoreController controller = StoreEnvironment.controller(getCarContext());
-        controller.reload();       // show what is on disk straight away
+        controller.reloadInBackground(); // show what is on disk as soon as it is read
         controller.refresh(false); // then fetch whatever is due in the background
         return StoreScreens.home(getCarContext(), controller);
     }

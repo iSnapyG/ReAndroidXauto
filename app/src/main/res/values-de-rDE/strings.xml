@@ -106,10 +106,6 @@ WARNUNG: Dieser Tweak wurde nicht ausgiebig getestet und könnte möglicherweise
     <string name="choose_accounts">Konten auswählen</string>
     <string name="use_all">Alle verwenden (EXPERIMENTAL)</string>
     <string name="log_copied">Protokoll wurde kopiert</string>
-    <string name="new_version_available">Neue Version vefügbar</string>
-    <string name="go_to_new_version">Eine neue Version von AndroidAutoX (Version %1$s) ist auf GitHub verfügbar. Möchten Sie sie jetzt herunterladen?</string>
-    <string name="go_to_download">Zum Download</string>
-    <string name="ignore_for_now">Vorläufig ignorieren</string>
     <string name="many_accounts_warning">AndroidAutoX hat eine große Zahl von Google-Konten, die auf dem Gerät gespeichert sind, gefunden (%1$s).\nDies kann sich negativ auf den Erfolg des Patching-Prozesses auswirken und AndroidAutoX könnte fehlschlagen.\nSie können entweder die Konten wählen, die Sie hauptsächlich mit den Google Play Services verwenden, um den Patch nur auf sie anzuwenden (2 oder weniger wird empfohlen) oder einen experimentellen Modus aktivieren, der alle Konten patchen soll.\nBITTE BEACHTEN SIE, dass der experimentelle Modus einige Abstürze auf dem Telefon verursachen könnte, während der Patch läuft.</string>
     <string name="dark_switch_tweak">Tag/Nacht Option</string>
     <string name="tutorial_assistant_suggestions">Mit diesem Tweak wird eine neue Funktion aktiviert, die einige Schnellverknüpfungen für Assistant-Aktionen oben auf dem Startbildschirm hinzufügt.</string>

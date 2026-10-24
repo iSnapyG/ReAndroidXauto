@@ -9,11 +9,9 @@
     android:clipToPadding="false"
     tools:context=".MainActivity">
 
-    <!-- Ambient AI backdrop: soft colour blobs that slowly drift and breathe
-         behind the content the whole time the app is open (animated in
-         MainActivity#startAurora). Fills the screen, drawn first = behind
-         everything; blobs bleed past the edges (clipChildren=false) for a
-         natural aurora. The translucent surfaces above let it glow through. -->
+    <!-- Static ambient backdrop: soft colour blobs behind the content. Fills the screen and
+         is drawn first (behind everything); the translucent surfaces above let it glow
+         through. Nothing here animates, so it costs no frames while the app is open. -->
     <FrameLayout
         android:id="@+id/aurora_layer"
         android:layout_width="0dp"
@@ -161,6 +159,12 @@
             android:layout_height="0dp"
             android:layout_width="0dp"
             layout="@layout/scrollview_settings" />
+
+        <!-- Install tab: filled in code by StoreInstallPage -->
+        <FrameLayout
+            android:id="@+id/page_four"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </androidx.viewpager.widget.ViewPager>
 

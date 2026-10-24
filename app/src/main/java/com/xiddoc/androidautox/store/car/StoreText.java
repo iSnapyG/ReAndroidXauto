@@ -9,11 +9,11 @@ import com.xiddoc.androidautox.store.StoreInstaller;
 import com.xiddoc.androidautox.store.UpdateCheck;
 
 /** Turns store state into the sentences shown in the car. */
-final class StoreText {
+public final class StoreText {
 
     private StoreText() {}
 
-    static String outcome(Context c, StoreInstaller.Result r) {
+    public static String outcome(Context c, StoreInstaller.Result r) {
         String detail = r.detail;
         switch (r.outcome) {
             case OK: return c.getString(R.string.store_result_ok);
@@ -39,7 +39,7 @@ final class StoreText {
     }
 
     /** What the running operation is doing, for the progress message. */
-    static String progress(Context c, StoreController controller) {
+    public static String progress(Context c, StoreController controller) {
         String name = controller.busyName();
         StoreInstaller.Stage stage = controller.stage();
         switch (controller.operation()) {

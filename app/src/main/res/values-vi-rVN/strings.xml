@@ -105,10 +105,6 @@ WARNING: This tweak has not been extensively tested and could potentially break 
     <string name="choose_accounts">Chọn tài khoản</string>
     <string name="use_all">Sử dụng tất cả (THỬ NGHIỆM) </string>
     <string name="log_copied">Nhật ký đã được sao chép</string>
-    <string name="new_version_available">Có phiên bản mới khả dụng</string>
-    <string name="go_to_new_version">Một phiên bản mới của AndroidAutoX (phiên bản %1$s) khả dụng trên GitHub. Bạn có muốn tải nó bây giờ?</string>
-    <string name="go_to_download">Đến trang tải xuống</string>
-    <string name="ignore_for_now">Bỏ qua bây giờ</string>
     <string name="many_accounts_warning">AndroidAutoX đã tìm thấy một số lượng lớn (%1$s) tài khoản Google được lưu trong thiết bị.\nĐiều này có thể ảnh hưởng tiêu cực đến sự thành công của quá trình vá lỗi và AndroidAutoX có thể không thành công.\nBạn có thể chọn (các) tài khoản mà bạn chủ yếu sử dụng với Dịch vụ Google Play để chỉ áp dụng bản vá cho chúng (khuyến nghị 2 hoặc ít hơn) hoặc kích hoạt chế độ thử nghiệm vá tất cả các tài khoản.\nHÃY LƯU Ý rằng chế độ thử nghiệm có thể gây ra một số sự cố cho điện thoại trong khi vá đang chạy.</string>
     <string name="dark_switch_tweak">lựa chọn ngày/đêm</string>
     <string name="tutorial_assistant_suggestions">This tweak will activate a new feature that adds some quick shortcuts to Assistant actions on top of home screen.</string>

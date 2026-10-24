@@ -149,6 +149,19 @@ public final class StoreController {
         notifyObservers();
     }
 
+    /**
+     * {@link #reload} on the background executor, for callers on the UI thread: a large cached
+     * catalog takes a moment to read.
+     */
+    public void reloadInBackground() {
+        executor.execute(new Runnable() {
+            @Override
+            public void run() {
+                reload();
+            }
+        });
+    }
+
     /** Downloads what is due (the user's catalog, and the F-Droid index if allowed) in the background. */
     public boolean refresh(final boolean force) {
         if (!begin(Operation.REFRESHING, "")) return false;
@@ -189,8 +202,48 @@ public final class StoreController {
 
     /** Updates every installed app the catalog has a newer version of. */
     public boolean updateAll() {
-        final List<StoreApp> due = StoreFilter.updates(apps(), trackedVersions());
+        return startBatch(StoreFilter.updates(apps(), trackedVersions()));
+    }
+
+    /** Installs or updates several apps, one after the other. */
+    public boolean installAll(List<StoreApp> chosen) {
+        return startBatch(new ArrayList<StoreApp>(chosen));
+    }
+
+    /** How the last installs of these apps went (apps that never ran count as not run). */
+    public synchronized BatchSummary summary(List<StoreApp> chosen) {
+        return BatchSummary.of(chosen, results);
+    }
+
+    /** The apps the user added by hand. */
+    public List<StoreApp> customApps() {
+        return loader.customApps();
+    }
+
+    /**
+     * Adds (or replaces) an app of the user's own and refreshes the list.
+     *
+     * @return false if the limit on own apps is reached
+     */
+    public boolean addCustomApp(StoreApp app) throws IOException {
+        List<StoreApp> now = loader.customApps();
+        if (!CustomApps.canAdd(now, app)) return false;
+        loader.saveCustomApps(CustomApps.add(now, app));
+        reload();
+        return true;
+    }
+
+    /** Removes an app the user added by hand (it is not uninstalled). */
+    public void removeCustomApp(String packageName) throws IOException {
+        loader.saveCustomApps(CustomApps.remove(loader.customApps(), packageName));
+        reload();
+    }
+
+    private boolean startBatch(final List<StoreApp> due) {
         if (due.isEmpty() || !begin(Operation.INSTALLING, "")) return false;
+        synchronized (this) {
+            for (StoreApp app : due) results.remove(app.packageName);
+        }
         executor.execute(new Runnable() {
             @Override
             public void run() {

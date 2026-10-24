@@ -2,9 +2,6 @@ package com.xiddoc.androidautox;
 
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.ClipData;
@@ -16,14 +13,10 @@ import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.graphics.RenderEffect;
-import android.graphics.Shader;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.text.Html;
-import android.text.method.LinkMovementMethod;
 import android.webkit.URLUtil;
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
@@ -58,6 +51,7 @@ import java.util.regex.Pattern;
 
 import com.xiddoc.androidautox.CarRemoverActivity.CarRemover;
 import com.xiddoc.androidautox.Utils.BottomDialog;
+import com.xiddoc.androidautox.store.android.StoreInstallPage;
 import com.xiddoc.androidautox.store.android.StoreSettingsDialog;
 import com.xiddoc.androidautox.autox.AutoXEnablementPolicy;
 import com.xiddoc.androidautox.autox.AutoXSettingsStore;
@@ -294,6 +288,8 @@ public class MainActivity extends AppCompatActivity {
     // Index of the Logs page in the ViewPager; set where the pages are inserted
     // so it can't silently drift out of sync with the adapter order.
     private int logsPageIndex;
+    /** The Install tab; released in {@link #onDestroy}. */
+    private StoreInstallPage installPage;
     private boolean  urlprototype;
 
 
@@ -335,47 +331,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        Bundle extras = new Bundle()    ;
-
-        try {
-            extras = getIntent().getExtras();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-
-
         final String path = getApplicationInfo().dataDir;
         appDirectory = path;
         loadStatus(path);
 
 
 
-        if (extras != null && extras.getString("NewVersionName") != null) {
-
-            BottomDialog bd;
-
-            final BottomDialog builder2 = new BottomDialog.Builder(this)
-                    .setTitle(R.string.new_version_available)
-                    .setContent(getString(R.string.go_to_new_version, extras.getString("NewVersionName")))
-                    .setPositiveBackgroundColor(R.color.brand_blue)
-                    .setPositiveText(R.string.go_to_download)
-                    .setNegativeText(R.string.ignore_for_now)
-                    .onPositive(new BottomDialog.ButtonCallback() {
-                        @Override
-                        public void onClick(@NonNull BottomDialog dialog) {
-                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/Xiddoc/AndroidAutoX/releases/")));
-                        }
-                    })
-                    .onNegative(new BottomDialog.ButtonCallback() {
-                        @Override
-                        public void onClick(@NonNull BottomDialog dialog) {
-
-                        }
-                    })
-                    .setBackgroundColor(R.color.centercolor).build();
-
-            builder2.show();
-        }
 
 
 
@@ -403,11 +364,14 @@ public class MainActivity extends AppCompatActivity {
         logsPageIndex = adapter.insertViewId(R.id.page_two, getString(R.string.tab_logs));
         // Settings is the new third tab (Logs stays page_two / logsPageIndex).
         adapter.insertViewId(R.id.page_three, getString(R.string.tab_settings));
+        // Install tab: a checklist of store apps, built in code.
+        adapter.insertViewId(R.id.page_four, getString(R.string.tab_install));
         viewPager.setAdapter(adapter);
-        // All three pages are static <include> views; with the default offscreen limit of 1,
-        // swiping away from Settings (page three) would detach it and a swipe back would find
-        // a null page_three. Keep all three alive.
-        viewPager.setOffscreenPageLimit(2);
+        // All pages are static views; with the default offscreen limit of 1, swiping away from
+        // Settings (page three) would detach it and a swipe back would find a null page_three.
+        // Keep all four alive.
+        viewPager.setOffscreenPageLimit(3);
+        installPage = StoreInstallPage.attach(this, (android.view.ViewGroup) findViewById(R.id.page_four));
 
         com.google.android.material.tabs.TabLayout tabLayout = findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(viewPager);
@@ -505,10 +469,6 @@ public class MainActivity extends AppCompatActivity {
                 rebootFabController.onPageChanged(position);
             }
         });
-
-        // Ambient AI backdrop: keep the aurora blobs slowly drifting/breathing
-        // the whole time the screen is open.
-        startAurora();
 
 
 
@@ -1571,6 +1531,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         // Drop any in-flight background reconcile result so we never touch a destroyed activity.
         activityDestroyed = true;
+        if (installPage != null) installPage.detach();
         super.onDestroy();
     }
 
@@ -1748,11 +1709,6 @@ public class MainActivity extends AppCompatActivity {
      * each constant maps here to its button id + label/desc strings + click behaviour.
      */
     private void setupSettingsTab(final SharedPreferences prefs) {
-        // About: inline, with clickable GitHub links.
-        TextView settingsAbout = findViewById(R.id.settings_about_text);
-        settingsAbout.setText(Html.fromHtml(getString(R.string.about_part_one)));
-        settingsAbout.setMovementMethod(LinkMovementMethod.getInstance());
-
         final View devGroup = findViewById(R.id.settings_dev_group);
 
         // Drive the wiring from SettingAction so it stays the canonical list of settings
@@ -3759,33 +3715,6 @@ appendText(logs, "\n\n--  Restoring ownership of the database   --");
                 }
             }
         });
-    }
-
-    /** Slowly drift, scale and soften the ambient aurora blobs for a dynamic AI feel. */
-    private void startAurora() {
-        float d = getResources().getDisplayMetrics().density;
-        animateBlob(findViewById(R.id.aurora_blob1), 9000, 34f * d, 28f * d, 1.15f);
-        animateBlob(findViewById(R.id.aurora_blob2), 13000, -40f * d, 24f * d, 1.25f);
-        animateBlob(findViewById(R.id.aurora_blob3), 16000, 26f * d, -32f * d, 1.2f);
-    }
-
-    private void animateBlob(View v, long duration, float dx, float dy, float maxScale) {
-        if (v == null) return;
-        float blur = 40f * getResources().getDisplayMetrics().density;
-        v.setRenderEffect(RenderEffect.createBlurEffect(blur, blur, Shader.TileMode.DECAL));
-        ObjectAnimator tx = ObjectAnimator.ofFloat(v, View.TRANSLATION_X, 0f, dx);
-        ObjectAnimator ty = ObjectAnimator.ofFloat(v, View.TRANSLATION_Y, 0f, dy);
-        ObjectAnimator sx = ObjectAnimator.ofFloat(v, View.SCALE_X, 1f, maxScale);
-        ObjectAnimator sy = ObjectAnimator.ofFloat(v, View.SCALE_Y, 1f, maxScale);
-        for (ObjectAnimator a : new ObjectAnimator[]{tx, ty, sx, sy}) {
-            a.setDuration(duration);
-            a.setRepeatCount(ValueAnimator.INFINITE);
-            a.setRepeatMode(ValueAnimator.REVERSE);
-            a.setInterpolator(new android.view.animation.AccelerateDecelerateInterpolator());
-        }
-        AnimatorSet set = new AnimatorSet();
-        set.playTogether(tx, ty, sx, sy);
-        set.start();
     }
 
     /**

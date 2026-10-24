@@ -126,13 +126,24 @@ public class StoreCatalogParserTest {
     }
 
     @Test
-    public void writeRejectsSourcesItCannotRepresent() throws IOException {
-        List<StoreApp> apps = Collections.singletonList(StoreFixtures.github("org.example.gh", SIG));
-        try {
-            StoreCatalogParser.write(apps, new StringWriter());
-            fail("expected IllegalArgumentException");
-        } catch (IllegalArgumentException expected) {
-            assertTrue(expected.getMessage().contains("fixed-URL"));
-        }
+    public void writesEverySourceTypeAndReadsThemBack() throws IOException {
+        List<StoreApp> apps = Arrays.asList(
+                StoreFixtures.github("org.example.gh", SIG),
+                StoreFixtures.fdroidRef("Ref", "org.example.ref", StoreApp.Kind.AUTOX, SIG),
+                StoreFixtures.direct("org.example.fixed", SHA, SIG));
+        StringWriter out = new StringWriter();
+        StoreCatalogParser.write(apps, out);
+
+        StoreCatalogParser.Result r = StoreCatalogParser.parse(new StringReader(out.toString()),
+                StoreApp.Origin.CATALOG, 10);
+
+        assertEquals(0, r.skipped);
+        assertEquals(3, r.apps.size());
+        assertEquals(ApkSource.Type.GITHUB, r.apps.get(0).source.type);
+        assertEquals("owner/repo", r.apps.get(0).source.repo);
+        assertEquals("\\.apk$", r.apps.get(0).source.assetPattern);
+        assertEquals(ApkSource.Type.FDROID, r.apps.get(1).source.type);
+        assertEquals(StoreApp.Kind.AUTOX, r.apps.get(1).kind);
+        assertEquals(ApkSource.Type.DIRECT, r.apps.get(2).source.type);
     }
 }

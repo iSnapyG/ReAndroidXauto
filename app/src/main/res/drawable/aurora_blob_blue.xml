@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Ambient "aurora" blob: a soft radial bloom that fades to transparent. Several
-     of these drift/breathe behind the content (see MainActivity#startAurora) to
-     give the app a dynamic, AI-app feel. Blue lobe. -->
+<!-- Soft radial bloom behind the content; static. -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="oval">
     <gradient

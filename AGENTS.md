@@ -8,7 +8,7 @@ AndroidAutoX is a native Android app that applies "tweaks" to Google's Android A
 
 - Application ID / package: `com.xiddoc.androidautox`
 - App name: "AndroidAutoX"
-- Repository: https://github.com/Xiddoc/AndroidAutoX
+- Repository: https://github.com/iSnapyG/ReAndroidXauto (fork of https://github.com/Xiddoc/AndroidAutoX, GPL-2.0)
 - Requires a **rooted** device.
 
 ## Tech stack
@@ -33,11 +33,10 @@ AndroidAutoX is a native Android app that applies "tweaks" to Google's Android A
 | `gradlew`, `gradlew.bat`, `gradle/` | Gradle wrapper |
 | `app/src/main/AndroidManifest.xml` | App manifest / declared activities |
 | `app/src/main/java/com/xiddoc/androidautox/` | All Java source |
-| `app/src/main/java/com/xiddoc/androidautox/SplashActivity.java` | Entry point: disclaimer, root check, asset copy |
+| `app/src/main/java/com/xiddoc/androidautox/SplashActivity.java` | Entry point: disclaimer, root check |
 | `app/src/main/java/com/xiddoc/androidautox/MainActivity.java` | Main UI + all tweak handlers (~4300 lines) |
 | `app/src/main/java/com/xiddoc/androidautox/AppsList.java` | App list helper |
 | `app/src/main/java/com/xiddoc/androidautox/StreamLogs.java` | Log streaming view |
-| `app/src/main/java/com/xiddoc/androidautox/AboutDialog.java` | About dialog |
 | `app/src/main/java/com/xiddoc/androidautox/NoRootDialog.java` | Shown when root is unavailable |
 | `app/src/main/java/com/xiddoc/androidautox/NotSuccessfulDialog.java` | Shown when a tweak fails |
 | `app/src/main/java/com/xiddoc/androidautox/RebootDialog.java` | Prompts a reboot after a tweak |
@@ -113,6 +112,17 @@ deliberate single clean path — there is **no dual root-only-vs-LSPosed support
   `MessageTemplate` instead of creating a virtual display).
 - **Existing Phenotype/Gearhead root tweaks are UNAFFECTED** — they need only root and have
   nothing to do with the AutoX LSPosed gate.
+
+## Install tab and boot behaviour
+
+- `MainActivity` has four tabs: Tweaks, Logs, Settings, Install. The Install tab is
+  `store/android/StoreInstallPage` (built in code); see `docs/app-store.md`.
+- Nothing heavy runs at boot: `BootReceiver` only re-schedules the re-apply job, and the first
+  re-apply waits `ReapplyScheduler.BOOT_DELAY_MS` (3 minutes) and needs the battery not low.
+  The LSPosed module is still loaded into `system_server` at boot if the user enabled its scope
+  in LSPosed; unticking "System Framework" for AndroidAutoX there removes that cost (AutoX
+  then does not work).
+- The background backdrop is static; do not add always-running animations to `activity_main`.
 
 ## Building
 
@@ -232,7 +242,7 @@ A CI pipeline using GitHub Actions is being added. It builds and signs the app u
 
 ## How the app works at runtime
 
-1. **`SplashActivity`** launches first. It shows a safety-warning disclaimer; a 5-second `CountDownTimer` gates the "Proceed" / "I understand" button (`activity_splash.xml`).
+1. **`SplashActivity`** launches first. It shows a safety-warning disclaimer with a "Proceed" button and a "don't show again" button (`activity_splash.xml`); there are no countdowns and no network calls here.
 2. It requests root **asynchronously** off the main thread (`requestRootAsync()`), since acquisition blocks on Magisk's grant prompt and would otherwise ANR. Root is judged by `MainActivity.hasRootAccess()` → `Shell.getShell().isRoot()` (the shell's *real* root status, because a non-root fallback shell still echoes output, so command output can't be trusted). The result is stored as a tri-state (`pending` / `granted` / `denied`).
    - **Event-driven wait, no polling.** The pure `RootGate` decision class maps that tri-state to `PROCEED` / `WAIT` / `SHOW_RETRY`. Tapping "Proceed" while the request is still pending shows a brief "requesting root" toast (`WAIT`) instead of falsely dead-ending; the worker thread posts its result back via `runOnUiThread`, which re-runs the gate and advances automatically. A single-flight guard prevents duplicate request threads, and an `onDestroy` flag drops any result that arrives after the activity is gone (no work posted to a destroyed activity).
    - **"Request again" retry.** If the request finished without root, `NoRootDialog` is shown with a "Request again" action (`retryRootRequest()`). Because libsu caches a single shell singleton (so a warm/denied shell would never re-run `su`), retry first calls `MainActivity.resetRootShell()` — which closes the cached shell via `Shell.getCachedShell().close()` so the next `getShell()` builds a fresh one and genuinely re-issues `su`, re-prompting Magisk. (Caveat: if the user told Magisk to *remember* a deny, Magisk may auto-deny a fresh `su` until the rule is changed.)

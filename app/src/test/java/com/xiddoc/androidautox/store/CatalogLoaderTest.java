@@ -191,4 +191,38 @@ public class CatalogLoaderTest {
         assertFalse(loader.hasFdroidCache());
         assertEquals(2, loader.load(true).size());
     }
+
+    private static StoreApp mine(String pkg) {
+        return CustomApps.githubApp("Mine", "owner/repo", pkg, StoreFixtures.SIG_C, "", StoreApp.Kind.OTHER).app;
+    }
+
+    @Test
+    public void usersOwnAppsAreSavedListedAndOutliveClearedDownloads() throws IOException {
+        CatalogLoader loader = loader();
+        assertTrue(loader.customApps().isEmpty());
+
+        loader.saveCustomApps(Arrays.asList(mine("org.example.mine"), mine("org.example.player")));
+
+        assertEquals(2, loader.customApps().size());
+        Map<String, StoreApp> apps = byPackage(loader.load(false));
+        assertEquals(3, apps.size());                          // two of mine plus the seed's Maps
+        assertEquals(ApkSource.Type.GITHUB, apps.get("org.example.mine").source.type);
+        // an app of mine wins over a catalog app with the same package
+        assertEquals(ApkSource.Type.GITHUB, apps.get("org.example.player").source.type);
+
+        loader.clearCaches();
+        assertEquals(2, loader.customApps().size());
+        loader.saveCustomApps(Arrays.<StoreApp>asList());
+        assertTrue(loader.customApps().isEmpty());
+    }
+
+    @Test
+    public void aDamagedOwnAppsFileIsIgnored() throws IOException {
+        File dir = new File(tmp.getRoot(), "cache/store");
+        assertTrue(dir.mkdirs());
+        Files.write(new File(dir, CatalogLoader.CUSTOM_FILE).toPath(), "garbage".getBytes());
+        CatalogLoader loader = loader(dir, SEED);
+        assertTrue(loader.customApps().isEmpty());
+        assertEquals(2, loader.load(false).size());
+    }
 }

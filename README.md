@@ -1,13 +1,14 @@
 # AndroidAutoX 🚗⚙️
 
-![AndroidAutoX](assets/banner.png)
-
 [![License: GPL v2](https://img.shields.io/badge/License-GPLv2-blue.svg)](LICENSE)
-[![Platform: Android](https://img.shields.io/badge/Platform-Android-3DDC84.svg)](https://github.com/Xiddoc/AndroidAutoX)
-[![Build](https://github.com/Xiddoc/AndroidAutoX/actions/workflows/build.yml/badge.svg)](https://github.com/Xiddoc/AndroidAutoX/actions/workflows/build.yml)
-[![Coverage: 100%](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](https://github.com/Xiddoc/AndroidAutoX/actions/workflows/build.yml)
+[![Platform: Android](https://img.shields.io/badge/Platform-Android-3DDC84.svg)](https://github.com/iSnapyG/ReAndroidXauto)
+[![Build](https://github.com/iSnapyG/ReAndroidXauto/actions/workflows/build.yml/badge.svg)](https://github.com/iSnapyG/ReAndroidXauto/actions/workflows/build.yml)
+[![Coverage: 100%](https://img.shields.io/badge/coverage-100%25-brightgreen.svg)](https://github.com/iSnapyG/ReAndroidXauto/actions/workflows/build.yml)
 
-The ultimate All-In-One utility to tweak Android Auto behaviour.
+Tweak Android Auto, and install apps into it from a built-in store.
+
+A fork of [AndroidAutoX](https://github.com/Xiddoc/AndroidAutoX) by Xiddoc, licensed under the
+GNU GPL v2 (see [LICENSE](LICENSE) and [THANKS.md](THANKS.md)).
 
 ## ✨ Features
 
@@ -24,6 +25,8 @@ The ultimate All-In-One utility to tweak Android Auto behaviour.
 - Tweak presets: save the tweaks you have on under a name and switch back in one step
 - Export / import your tweaks as a text file
 - **AutoX Store**: a second Android Auto launcher entry that lists apps made for Android Auto (and phone apps you can run through AutoX), with search, categories, silent root install, updates and uninstall. Catalog: a built-in list plus the F-Droid index (opt-in) and an optional catalog URL of your own. See [docs/app-store.md](docs/app-store.md).
+
+- **Install tab**: tick several apps from the store and install them in one go; add apps from a GitHub repository with a pinned signing key (see [docs/app-store.md](docs/app-store.md)).
 
 …and much more 🎛️
 

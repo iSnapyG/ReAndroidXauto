@@ -27,6 +27,19 @@ public final class StoreFilter {
         return sorted(out);
     }
 
+    /**
+     * Apps of {@code kind} (any kind if null) that match {@code query} (every app if blank): by
+     * relevance when searching, otherwise by name.
+     */
+    public static List<StoreApp> matching(List<StoreApp> apps, StoreApp.Kind kind, String query) {
+        List<StoreApp> pool = new ArrayList<StoreApp>();
+        for (StoreApp a : apps) {
+            if (kind == null || a.kind == kind) pool.add(a);
+        }
+        String clean = StoreValidation.text(query, 100);
+        return clean.isEmpty() ? sorted(pool) : search(pool, clean);
+    }
+
     /** Apps listing the category (case-insensitive), by name. */
     public static List<StoreApp> byCategory(List<StoreApp> apps, String category) {
         List<StoreApp> out = new ArrayList<StoreApp>();

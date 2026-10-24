@@ -16,6 +16,7 @@ import org.junit.rules.TemporaryFolder;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -155,6 +156,15 @@ public class StoreControllerTest {
     }
 
     @Test
+    public void reloadInBackgroundUsesTheExecutor() {
+        queued = true;
+        controller.reloadInBackground();
+        assertTrue(controller.apps().isEmpty());              // nothing ran yet
+        runQueue();
+        assertEquals(2, controller.apps().size());
+    }
+
+    @Test
     public void installTracksProgressAndResult() {
         controller.reload();
         seen.clear();
@@ -252,6 +262,77 @@ public class StoreControllerTest {
         assertEquals(Long.valueOf(20), controller.trackedVersions().get("org.example.other"));
         assertFalse(controller.updateAll());                              // all current now
         assertNotNull(controller.lastResult("org.example.other"));
+    }
+
+    @Test
+    public void installAllInstallsEveryChosenApp() {
+        controller.reload();
+        List<StoreApp> chosen = Arrays.asList(app("org.example.app"), app("org.example.other"));
+
+        assertTrue(controller.installAll(chosen));
+
+        assertEquals(2, commands.size());
+        BatchSummary summary = controller.summary(chosen);
+        assertEquals(2, summary.ok);
+        assertEquals(0, summary.failed);
+        assertEquals(0, summary.notRun);
+        assertFalse(controller.busy());
+    }
+
+    @Test
+    public void installAllRefusesNothingToDoAndBusyTimes() {
+        controller.reload();
+        assertFalse(controller.installAll(Collections.<StoreApp>emptyList()));
+
+        queued = true;
+        assertTrue(controller.install(app("org.example.app")));
+        assertFalse(controller.installAll(Arrays.asList(app("org.example.other"))));
+        runQueue();
+        assertEquals(1, commands.size());
+    }
+
+    @Test
+    public void summaryCountsFailuresAndAppsThatNeverRan() {
+        controller.reload();
+        StoreApp noDownload = StoreFixtures.named("Lost", "org.example.lost", "s", StoreApp.Kind.CAR, 1);
+        StoreApp never = StoreFixtures.named("Never", "org.example.never", "s", StoreApp.Kind.CAR, 1);
+        List<StoreApp> chosen = Arrays.asList(app("org.example.app"), noDownload);
+
+        assertTrue(controller.installAll(chosen));
+
+        BatchSummary summary = controller.summary(Arrays.asList(app("org.example.app"), noDownload, never));
+        assertEquals(1, summary.ok);
+        assertEquals(1, summary.failed);
+        assertEquals(1, summary.notRun);
+    }
+
+    @Test
+    public void usersOwnAppsCanBeAddedAndRemoved() throws Exception {
+        controller.reload();
+        StoreApp mine = CustomApps.githubApp("Mine", "owner/repo", "org.example.mine",
+                StoreFixtures.SIG_A, "", StoreApp.Kind.CAR).app;
+
+        assertTrue(controller.customApps().isEmpty());
+        assertTrue(controller.addCustomApp(mine));
+        assertEquals(1, controller.customApps().size());
+        assertEquals(3, controller.apps().size());
+        assertEquals(ApkSource.Type.GITHUB, app("org.example.mine").source.type);
+
+        controller.removeCustomApp("org.example.mine");
+        assertTrue(controller.customApps().isEmpty());
+        assertEquals(2, controller.apps().size());
+    }
+
+    @Test
+    public void ownAppsHaveALimit() throws Exception {
+        for (int i = 0; i < CustomApps.MAX_APPS; i++) {
+            assertTrue(controller.addCustomApp(CustomApps.githubApp("n", "o/r", "org.example.app" + i,
+                    StoreFixtures.SIG_A, "", StoreApp.Kind.OTHER).app));
+        }
+        StoreApp extra = CustomApps.githubApp("n", "o/r", "org.example.extra",
+                StoreFixtures.SIG_A, "", StoreApp.Kind.OTHER).app;
+        assertFalse(controller.addCustomApp(extra));
+        assertEquals(CustomApps.MAX_APPS, controller.customApps().size());
     }
 
     @Test

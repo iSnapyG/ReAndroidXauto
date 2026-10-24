@@ -36,6 +36,9 @@ public final class CatalogLoader {
 
     static final String REMOTE_FILE = "remote-catalog.json";
     static final String FDROID_FILE = "fdroid-catalog.json";
+    /** The apps the user added by hand; kept when the downloads are cleared. */
+    static final String CUSTOM_FILE = "my-apps.json";
+    static final int MAX_CUSTOM_APPS = CustomApps.MAX_APPS;
 
     public enum Step { SKIPPED, OK, FAILED }
 
@@ -74,7 +77,7 @@ public final class CatalogLoader {
      *                  unresolved and unlisted)
      */
     public List<StoreApp> load(boolean useFdroid) {
-        List<StoreApp> catalog = new ArrayList<StoreApp>();
+        List<StoreApp> catalog = new ArrayList<StoreApp>(customApps());
         File remote = new File(dir, REMOTE_FILE);
         if (remote.isFile()) catalog.addAll(readFile(remote, StoreApp.Origin.CATALOG, MAX_REMOTE_APPS));
         catalog.addAll(readSeed());
@@ -84,6 +87,28 @@ public final class CatalogLoader {
             fdroid.addAll(readFile(cache, StoreApp.Origin.FDROID, MAX_FDROID_APPS));
         }
         return CatalogMerge.merge(catalog, fdroid);
+    }
+
+    /** The apps the user added by hand (empty if none or the file is damaged). */
+    public List<StoreApp> customApps() {
+        File file = new File(dir, CUSTOM_FILE);
+        if (!file.isFile()) return new ArrayList<StoreApp>();
+        return readFile(file, StoreApp.Origin.CATALOG, MAX_CUSTOM_APPS);
+    }
+
+    /** Replaces the user's own apps. */
+    public void saveCustomApps(List<StoreApp> apps) throws IOException {
+        Files.createDirectories(dir.toPath());
+        File target = new File(dir, CUSTOM_FILE);
+        File tmp = new File(dir, CUSTOM_FILE + ".tmp");
+        Writer w = new BufferedWriter(new OutputStreamWriter(
+                Files.newOutputStream(tmp.toPath()), StandardCharsets.UTF_8));
+        try {
+            StoreCatalogParser.write(apps, w);
+        } finally {
+            w.close();
+        }
+        Files.move(tmp.toPath(), target.toPath(), StandardCopyOption.REPLACE_EXISTING);
     }
 
     /** True if the F-Droid cache is missing or older than a week. */
@@ -128,7 +153,7 @@ public final class CatalogLoader {
         return new RefreshResult(remoteStep, fdroidStep, remoteApps, fdroidApps);
     }
 
-    /** Forgets everything downloaded (the bundled seed is unaffected). */
+    /** Forgets everything downloaded (the bundled seed and the user's own apps are unaffected). */
     public void clearCaches() throws IOException {
         Files.deleteIfExists(new File(dir, REMOTE_FILE).toPath());
         Files.deleteIfExists(new File(dir, FDROID_FILE).toPath());

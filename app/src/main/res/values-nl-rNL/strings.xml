@@ -106,10 +106,6 @@ WAARSCHUWING: Deze tweak is niet uitgebreid getest en kan Android Auto mogelijk 
     <string name="choose_accounts">Kies account</string>
     <string name="use_all">Alles gebruiken (EXPERIMENTAL)</string>
     <string name="log_copied">Het logboek is opgeslagen</string>
-    <string name="new_version_available">Nieuwe versie beschikbaar</string>
-    <string name="go_to_new_version">Er is een nieuwe versie van AndroidAutoX (versie %1$s) beschikbaar op GitHub. Wilt u het nu downloaden?</string>
-    <string name="go_to_download">Ga naar download</string>
-    <string name="ignore_for_now">Voor nu negeren</string>
     <string name="many_accounts_warning">AndroidAutoX vond een groot aantal (%1$s) Google-accounts op dit apparaat.\nDit kan een negatieve invloed hebben op het succes van het patch-proces en AndroidAutoX kan daardoor misschien niet werken.\nJe kunt de account(s) kiezen die je meestal met Google Play Services gebruikt om de patch toe te passen op alleen die (2 of minder is aanbevolen) of een experimentele modus activeren die alle accounts moet patchen.\nLET OP: de experimentele modus kan leiden tot crashes op de telefoon terwijl de patch actief is.</string>
     <string name="dark_switch_tweak">dag/nacht optie</string>
     <string name="tutorial_assistant_suggestions">Deze tweak zal een nieuwe functie activeren die enkele snelkoppelingen naar Assistent-acties toevoegt bovenaan het startscherm.</string>

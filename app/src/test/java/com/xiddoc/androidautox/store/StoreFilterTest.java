@@ -39,6 +39,19 @@ public class StoreFilterTest {
     }
 
     @Test
+    public void matchingCombinesKindAndQuery() {
+        assertEquals(Arrays.asList("AntennaPod", "NewPipe", "Organic Maps", "VLC"),
+                names(StoreFilter.matching(ALL, null, "")));
+        assertEquals(Arrays.asList("AntennaPod", "NewPipe", "Organic Maps", "VLC"),
+                names(StoreFilter.matching(ALL, null, null)));
+        assertEquals(Arrays.asList("AntennaPod", "VLC"),
+                names(StoreFilter.matching(ALL, StoreApp.Kind.CAR, "  ")));
+        assertEquals(Arrays.asList("NewPipe"), names(StoreFilter.matching(ALL, null, "youtube")));
+        assertEquals(Arrays.asList("VLC"), names(StoreFilter.matching(ALL, StoreApp.Kind.CAR, "player")));
+        assertTrue(StoreFilter.matching(ALL, StoreApp.Kind.AUTOX, "vlc").isEmpty());
+    }
+
+    @Test
     public void byCategoryIgnoresCaseAndListsEachAppOnce() {
         StoreApp twice = StoreFixtures.named("Twice", "org.example.twice", "x", StoreApp.Kind.OTHER, 1,
                 "Multimedia", "multimedia");

@@ -15,8 +15,37 @@ settings tab).
 - "Use in AutoX" on an installed AutoX-kind app sets it as the AutoX target app (it does not
   turn AutoX on; AutoX still needs root and the LSPosed module).
 
+## Install tab (on the phone)
+
+The main screen has an **Install** tab: a searchable checklist of every app the store knows.
+Filter by *All*, *Made for Android Auto* or *Run through AutoX*, tick the apps you want
+(*Select all* ticks everything shown that can be installed), and tap **Install selected**. The
+apps are installed one after the other with a running progress line; **Cancel** stops after the
+current app. A summary ("Installed 2, failed 1, not run 0") and the first problem are shown at
+the end. Rows are greyed out when there is nothing to do (already current, or an F-Droid app
+whose index is not downloaded yet). GitHub-sourced apps show "tap to check for an update":
+installing again fetches the newest release and installs it if it is newer or equal.
+
+## Your own apps from GitHub
+
+**Add from GitHub** (Install tab) adds an app that a GitHub project publishes as a release
+file, for example a patched build a community repository provides. You enter the repository
+(`owner/name`), the app's package name, and the SHA-256 fingerprint of the key that signs it;
+an optional file-name pattern picks the right file when a release has several (default: any
+`.apk`). The app then installs and updates like any other, and a download signed with a
+different key is refused. Long-press one of your own apps in the list to remove it from your
+list (the installed app stays). Up to 50 apps; they are kept in `my-apps.json` next to the
+catalog caches and survive "Clear downloads".
+
+The store does not ship download links to patched third-party apps. If you use patched builds
+(for example ones made with ReVanced tools), you choose the repository and pin its signing key
+yourself; the signing key of a patched build is the patcher's, so get it from a build you trust
+(`apksigner verify --print-certs app.apk`) before adding it.
+
 ## Catalog sources
 
+0. **Your own apps** (Install tab, "Add from GitHub"): highest priority; they win over a
+   catalog entry with the same package.
 1. **Bundled seed** (`app/src/main/assets/store/seed-catalog.json`): a short list of apps,
    each pinned to the signing key F-Droid uses for it.
 2. **Your own catalog** (optional): an https URL in the phone settings. Same format as the seed.
@@ -95,5 +124,7 @@ catalog is rejected whole. To get a signer fingerprint: `apksigner verify --prin
 | `StoreInstaller` | Resolve, download, verify, install, uninstall |
 | `StoreController` | One-operation-at-a-time state shared by the car screens and the phone dialog |
 | `StoreFilter`, `Page`, `UpdateCheck`, `InstalledView` | Browse, search, paging, update status |
-| `store/android/*` | libsu shell, PackageManager inspector, wiring (excluded from coverage) |
+| `InstallChoice`, `InstallSelection`, `BatchSummary` | What each row of the Install tab offers, the ticked apps, batch result |
+| `CustomApps` | Validates and keeps the apps the user adds from GitHub |
+| `store/android/*` | libsu shell, PackageManager inspector, wiring, the Install tab (`StoreInstallPage`) and the Add dialog (excluded from coverage) |
 | `store/car/*` | Car App Library service, session and screens (excluded from coverage) |
